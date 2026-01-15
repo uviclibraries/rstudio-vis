@@ -12,10 +12,10 @@ output:
 
 # Data Cleaning
 
-- [1. Getting Ready: Installing
-  Packages](#1-getting-ready-installing-packages)
+- [1. Getting ready: installing
+  packages](#1-getting-ready-installing-packages)
 - [2. Getting data](#2-getting-data)
-- [3. Preparing our Workspace](#3-preparing-our-workspace)
+- [3. Preparing our workspace](#3-preparing-our-workspace)
   - [3.1 Working directory](#31-working-directory)
   - [3.2 Read data](#32-read-data)
   - [3.3 Preview data](#33-preview-data)
@@ -46,7 +46,7 @@ Remember, if you or your group have any questions or get stuck as you
 work through this in-class exercise, please ask the instructor for
 assistance. Have fun!
 
-## 1. Getting Ready: Installing Packages
+## 1. Getting ready: installing packages
 
 One of the most fascinating things about R is that it has an active
 community developing a lot of packages everyday, which makes R powerful.
@@ -79,15 +79,8 @@ Check your code
 
 ``` r
 install.packages("tidyverse") # Install the tidyverse package
-```
-
-    ## Warning: package 'tidyverse' is in use and will not be installed
-
-``` r
 install.packages("assertr") # Install the assertr package
 ```
-
-    ## Warning: package 'assertr' is in use and will not be installed
 
 </details>
 
