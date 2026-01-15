@@ -12,7 +12,7 @@ This workshop is primarily hands-on practice with RStudio in order to learn to u
     <iframe width="560" height="315" src="https://www.youtube.com/embed/dRkAvBz9Ibc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   1. [Download R Language for macOS (link to R language download)](https://cran.r-project.org/bin/macosx/){:target="_blank"}
      Look for the following on the left side of the browser window. Select one based on your Mac's chip. You can find out which chip your computer has by clicking the apple icon in the top left corner of your screen > About this Mac > Chip. It will say either "M..." or "Intel".
-     <img src="images/pre-workshop-01.png" alt="R Language Package download options" style="width:420px;"/>
+     <img src="images/pre-workshop-mac.png" alt="R Language Package download options" style="width:420px;"/>
   2. [Download RStudio IDE for macOS (link to RStudio download)](https://www.rstudio.com/products/rstudio/download/){:target="_blank"} 
 - **Windows Installation**:
   - Watch the R Language Installation Guide for Windows 10 (3 min video) [(link to installation video)](https://youtu.be/HqrqRMnK4XA){:target="_blank"} (3 min)
