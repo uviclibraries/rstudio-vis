@@ -19,8 +19,8 @@ output:
   - [3.1 Working directory](#31-working-directory)
   - [3.2 Read data](#32-read-data)
   - [3.3 Preview data](#33-preview-data)
-- [4. Introducing Piping](#4-introducing-piping)
-  - [4.1 Before Piping](#41-before-piping)
+- [4. Introducing piping](#4-introducing-piping)
+  - [4.1 Before piping](#41-before-piping)
   - [4.2 Piping](#42-piping)
 - [5. Cleaning and validating data](#5-cleaning-and-validating-data)
 
@@ -331,7 +331,7 @@ purchase data, but how big is the data set?
 - How many rows?
 - How many columns?
 
-We can find out the dimensions (rows and columns) using the`dim()`
+We can find out the dimensions (rows and columns) using the `dim()`
 function. This function takes only one parameter, the data set name.
 
 <div class="task-box" markdown="1">
@@ -394,12 +394,12 @@ dim(purchaseData)
 
 📍 Reminder! Save your work
 
-## 4. Introducing Piping
+## 4. Introducing Ppping
 
-Before we start with how to clean, manipulate and visualize our data, we
-want to introduce you to the `|>` symbol, which is very powerful to use
-in conjunction with the tidyverse package to easily manipulate and
-visualize data.
+Before we start with how to clean (this activity), manipulate and
+visualize our data (next activities), we want to introduce you to the
+`|>` symbol, which is very powerful to use in conjunction with the
+`tidyverse` package to easily manipulate and visualize data.
 
 This symbol is known as a “pipe”, and it’s used for feeding the result
 of one function directly into the next function.
@@ -411,7 +411,7 @@ Both symbols will work exactly the same in most cases. We will use the
 that if you see `%>%` in older tutorials or more specific `tidyverse`
 documentation, you can interpret it in the same way as `|>`. If you want
 to know more about their differences, you can check [this
-link](https://tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/)
+link](https://tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/).
 
 - e.g., Imagine you wanted to sort the column of your dataset in
   alphabetical order, you could either enter:
@@ -454,8 +454,6 @@ get the column names.
 
 - To get a list of column names, we can use the `names()` function.
   - parameter: data frame
-  - In this case, results appear in a vector rather than a list because
-    the column names are all the same data type (strings).
   - *Note*: The `names()` function is only useful for data frames and
     matrices for which we have column names.
 
@@ -535,7 +533,8 @@ objects containing the column names:
   opened in Excel
 - `alphaPurchaseDataColumnNames`: Ordered alphabetically (sorted)
 
-However, we only care about the list of alphabetically column names.
+However, we only care about the list of alphabetically-sorted column
+names.
 
 - We can achieve that using only 1 command, creating only 1 object with
   “nesting”.
@@ -550,8 +549,9 @@ function. - e.g., `function1(function2(parameter))`
 **Create an object through nested functions**
 
 In this task, use nesting to create one object containing the sorted
-vector of column names with a single line of code. - Name this object:
-`alphabeticalColumnNames`
+vector of column names with a single line of code.
+
+Name this object: `alphabeticalColumnNames`
 
 {::options parse_block_html='true' /}
 <details>
@@ -617,7 +617,7 @@ startingObject |>
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-8</u>
+⭐ <u>Task 1-9</u>
 
 **Create an object through piping**
 
@@ -691,6 +691,8 @@ other ways to write code, check out
 [this](https://r4ds.had.co.nz/pipes.html#pipes){:target=“\_blank”}.
 
 ## 5. Cleaning and validating data
+
+CONTENT TO BE ADDED
 
 <script>  
 function toggle(input) {

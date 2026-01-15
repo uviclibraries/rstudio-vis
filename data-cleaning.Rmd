@@ -48,8 +48,8 @@ endCodeDetailsBlock <- function() {
   - [3.1 Working directory](#31-working-directory)
   - [3.2 Read data](#32-read-data)
   - [3.3 Preview data](#33-preview-data)
-- [4. Introducing Piping](#4-introducing-piping)
-  - [4.1 Before Piping](#41-before-piping)
+- [4. Introducing piping](#4-introducing-piping)
+  - [4.1 Before piping](#41-before-piping)
   - [4.2 Piping](#42-piping)
 - [5. Cleaning and validating data](#5-cleaning-and-validating-data)
   
@@ -287,7 +287,7 @@ Now, we’ve imported our data and previewed the first 5 rows of our purchase da
 - How many rows?
 - How many columns?
 
-We can find out the dimensions (rows and columns) using the`dim()` function. This function takes only one parameter, the data set name.
+We can find out the dimensions (rows and columns) using the `dim()` function. This function takes only one parameter, the data set name.
 
 <div class="task-box" markdown="1">
 
@@ -312,10 +312,10 @@ endCodeDetailsBlock()
 You can use the `dim()` function to check if the correct number of rows and columns has been imported. In this case, the table imported has 51290 observations (i.e., rows) for 24 variables (i.e., columns). If you know the size of your dataset, you can check if everything was imported here.
 
 At this point, you have gone through the four major steps that are recommended at the start of your script to set the stage for your analysis:
-- Load any packages
-- Set working directory
-- Load data
-- Inspect and check if data was correctly imported.
+  - Load any packages
+  - Set working directory
+  - Load data
+  - Inspect and check if data was correctly imported.
 
 This is how your script should look so far:
 ```{r, eval = FALSE}
@@ -337,13 +337,13 @@ dim(purchaseData)
 
 📍 Reminder! Save your work
 
-## 4. Introducing Piping
+## 4. Introducing Ppping
 
-Before we start with how to clean, manipulate and visualize our data, we want to introduce you to the `|>` symbol, which is very powerful to use in conjunction with the tidyverse package to easily manipulate and visualize data.
+Before we start with how to clean (this activity), manipulate and visualize our data (next activities), we want to introduce you to the `|>` symbol, which is very powerful to use in conjunction with the `tidyverse` package to easily manipulate and visualize data.
 
 This symbol is known as a “pipe”, and it’s used for feeding the result of one function directly into the next function. 
 
-**Note:** The symbol `%>%` is also a "pipe" and comes from the `tidyverse` package, while the symbol `|>` is the base R pipe symbol. Both symbols will work exactly the same in most cases. We will use the `|>` symbol, which is now considered the standard pipe symbol, but know that if you see `%>%` in older tutorials or more specific `tidyverse` documentation, you can interpret it in the same way as `|>`. If you want to know more about their differences, you can check [this link](https://tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/)
+**Note:** The symbol `%>%` is also a "pipe" and comes from the `tidyverse` package, while the symbol `|>` is the base R pipe symbol. Both symbols will work exactly the same in most cases. We will use the `|>` symbol, which is now considered the standard pipe symbol, but know that if you see `%>%` in older tutorials or more specific `tidyverse` documentation, you can interpret it in the same way as `|>`. If you want to know more about their differences, you can check [this link](https://tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/).
 
 - e.g., Imagine you wanted to sort the column of your dataset in alphabetical order, you could either enter:
   - Two separate commands creating two data objects
@@ -374,7 +374,6 @@ To get our list of column names sorted alphabetically, we first need to get the 
 
 - To get a list of column names, we can use the `names()` function.
   - parameter: data frame
-  - In this case, results appear in a vector rather than a list because the column names are all the same data type (strings).
   - *Note*: The `names()` function is only useful for data frames and  matrices for which we have column names.
 
 <div class="task-box" markdown="1">
@@ -439,7 +438,7 @@ In Tasks 1-6 and 1-7, we ran two commands, resulting in two separate objects con
 - `purchaseDataColumnNames`: Ordered as they would be if the file were opened in Excel
 - `alphaPurchaseDataColumnNames`: Ordered alphabetically (sorted)
 
-However, we only care about the list of alphabetically column names.
+However, we only care about the list of alphabetically-sorted column names.
 
 - We can achieve that using only 1 command, creating only 1 object with “nesting”.
 
@@ -453,7 +452,8 @@ However, we only care about the list of alphabetically column names.
 **Create an object through nested functions**
 
 In this task, use nesting to create one object containing the sorted vector of column names with a single line of code.
-- Name this object: `alphabeticalColumnNames`
+
+Name this object: `alphabeticalColumnNames`
 
 ```{r echo = F, results='asis'}
 startCodeDetailsBlock(summaryText = "Check your code")
@@ -505,7 +505,7 @@ startingObject |>
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-8</u>
+⭐ <u>Task 1-9</u>
 
 **Create an object through piping**
 
@@ -560,6 +560,8 @@ endCodeDetailsBlock()
 If you want to know more about pipe, and how it is more intuitive than other ways to write code, check out [this](https://r4ds.had.co.nz/pipes.html#pipes){:target=“\_blank”}.
 
 ## 5. Cleaning and validating data
+
+CONTENT TO BE ADDED
 
 
 <script>  
