@@ -12,10 +12,10 @@ output:
 
 # Data Cleaning
 
-- [1. Getting Ready: Installing
-  Packages](#1-getting-ready-installing-packages)
+- [1. Getting ready: installing
+  packages](#1-getting-ready-installing-packages)
 - [2. Getting data](#2-getting-data)
-- [3. Preparing our Workspace](#3-preparing-our-workspace)
+- [3. Preparing our workspace](#3-preparing-our-workspace)
   - [3.1 Working directory](#31-working-directory)
   - [3.2 Read data](#32-read-data)
   - [3.3 Preview data](#33-preview-data)
@@ -46,7 +46,7 @@ Remember, if you or your group have any questions or get stuck as you
 work through this in-class exercise, please ask the instructor for
 assistance. Have fun!
 
-## 1. Getting Ready: Installing Packages
+## 1. Getting ready: installing packages
 
 One of the most fascinating things about R is that it has an active
 community developing a lot of packages everyday, which makes R powerful.
@@ -79,15 +79,8 @@ Check your code
 
 ``` r
 install.packages("tidyverse") # Install the tidyverse package
-```
-
-    ## Warning: package 'tidyverse' is in use and will not be installed
-
-``` r
 install.packages("assertr") # Install the assertr package
 ```
-
-    ## Warning: package 'assertr' is in use and will not be installed
 
 </details>
 
@@ -178,7 +171,7 @@ library(assertr)
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 5-2</u>
+⭐ <u>Task 1-2</u>
 
 **Download data**
 
@@ -206,7 +199,7 @@ look for data.
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-2</u>
+⭐ <u>Task 1-3</u>
 
 **Set your working directory**
 
@@ -246,8 +239,11 @@ about the orders.
 
 **Load data**
 
-Load your data into an object called `purchaseData`. *Hint:* go back to
-the last section to check which function to use to import .csv files.
+Load your data into an object called `purchaseData`.
+
+*Hint:* go back to the [introductory R Studio
+workshop](https://uviclibraries.github.io/rstudio/basics-importing-data.html)
+if you need to check which function to use to import .csv files.
 
 {::options parse_block_html='true' /}
 <details>
@@ -256,11 +252,6 @@ the last section to check which function to use to import .csv files.
 
 Check your code
 </summary>
-
-``` r
-# Load data
-purchaseData <- read.csv("docs/Global_Superstore_Orders_2016.csv")
-```
 
 ``` r
 # Load data
