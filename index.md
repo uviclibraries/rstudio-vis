@@ -3,34 +3,31 @@ layout: default
 title: Introduction 
 nav_order: 1
 ---
-**UPDATE PHOTO**
-<img src="images/WORKSHOP-LOGO-HERE.png" style="float:right;width:180px;" alt="image description">
+<img src="images/rstudio-logo.png" style="float:right;width:180px;" alt="image description">
 
-# WORKSHOP TITLE HERE (Use Regular Case Like this)
+# Data Analysis with R Studio - Data manipulation and visualization
 
-- Pre-workshop activities: 00 min 
-- Introductory presentation: 00 min
-- Hands-on activities: 00-00 min
+- Pre-workshop activities: 10 min 
+- Introductory presentation: 10 min
+- Hands-on activities: 80 min
 
-## Why TOOL NAME HERE? 
+## Why R and Rstudio? 
 
-[TOOL NAME](https://TOOL-URL-HERE.org/){:target="_blank"} Desribe the tool and how it can be used. This is an example of the description for Taguette:
+[R](https://cran.r-project.org/) is a free, open-source software and programming language for statistical analysis. It is available for Windows, Mac, and Linux. It allows for reproducible statistical analysis, including advanced methods, as well as the production of publication-quality graphs. Because it is free and open-source, users can also develop their methods and algorithms and release for others to use through the cration of _packages_. 
 
-[Taguette](https://taguette.org/) a user-friendly and free web-based tool that helps researchers to code and analyse their qualitative data. Taguette is a great tool for those who need to analyze interviews, reports, transcripts of any kinds, and a variety of text. With the tool, we can create codes and analyse texts easily and export in different file formats. If you have some or a lot of text to analyse, Taguette might be a great option for you.
+[RStudio](https://www.rstudio.com/products/rstudio/download/){:target="_blank"} is a free, open-source [integrated development environment](https://en.wikipedia.org/wiki/Integrated_development_environment) to facilitate the use of R (although it can also include other coding languages such as Python). 
 
-This workshop uses the OpenSource _Taguette_ software because it is free to use and many find it easier to learn than [other popular commercial software packages](https://en.wikipedia.org/wiki/Computer-assisted_qualitative_data_analysis_software){:target="_blank"}. 
+"RStudio does not replace R: You must install R before you can install or use RStudio. Instead, RStudio enhances the R programming experience with helpful features such as code completion, syntax highlighting, graph and table previews, and more. RStudio's interface is organized so that the user can clearly view graphs, data tables, R code, and output all at the same time." - [Kent State University Libraries](https://libguides.library.kent.edu/statconsulting/r){:target="_blank"}
 
-This workshop is not an endorsement of Taguette; there are many options for qualitative analysis and coding and other software may be better in other contexts. While an excellent teaching tool, _Taguette_ imposes some limitations that users should be aware of:
+**Who is this workshop for?**: Users who are familiar with basic R concepts covered in the [Data Analysis with R Studio - Introduction to R and summary statistics.](https://uviclibraries.github.io/rstudio/){:target="_blank"} workshop. In this workshop, we focus on how to check and clean your data, as well as how to vizualize your data. We will not cover how to perform statistical analysis, which are covered in the [Data Analysis with R Studio - Introduction to R and summary statistics.](https://uviclibraries.github.io/rstudio/){:target="_blank"} and [Data Analysis with R Studio - Intermediate data analysis](https://uviclibraries.github.io/rstudio-intermediate/) workshops.
 
-- Only text can be coded. For example videos and images can not be coded.
-- Passanges coded with different tags have the same colour in Taguette. 
-- Only basic analysis can be done in Taguette. External tools, like Microsoft Excel, can be used for more advanced analysis are covered in this workshop.
 
-## Learning objectives - UPDATE FOR THE NEW TOOL
+## Learning objectives
 
 At the end of this workshop, you will be able to:
 
-1. Identify the differences between manual coding and coding with qualitative coding software
-2. **MORE OBJECTIVES**
+1. Manipulate and clean data with the _Tidyverse_ package
+2. Check and validate your data using the _assertr_ package
+3. Create basic charts and plots (scatter, bar and line plots) with the _ggplot2_ package
  
 [NEXT STEP: Pre-Workshop Activities](pre-workshop.html){: .btn .btn-blue }
