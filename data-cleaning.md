@@ -12,15 +12,17 @@ output:
 
 # Data Cleaning
 
-[1. Getting Ready: Installing
-Packages](#1-getting-ready--installing-packages) [2. Getting
-data](#2-getting-data) [3. Preparing our
-Workspace](#3-preparing-our-workspace) - [3.1 Working
-directory](#31-working-directory) - [3.2 Read data](#32-read-data) -
-[3.3 Preview data](#33-preview-data) [4. Introducing
-Piping](#4-introducing-piping) - [4.1 Before
-Piping](#41-before-piping) - [4.2 Piping](#42-piping) [5. Cleaning and
-validating data](#5-cleaning-and-validating-data)
+- [1. Getting Ready: Installing
+  Packages](#1-getting-ready-installing-packages)
+- [2. Getting data](#2-getting-data)
+- [3. Preparing our Workspace](#3-preparing-our-workspace)
+  - [3.1 Working directory](#31-working-directory)
+  - [3.2 Read data](#32-read-data)
+  - [3.3 Preview data](#33-preview-data)
+- [4. Introducing Piping](#4-introducing-piping)
+  - [4.1 Before Piping](#41-before-piping)
+  - [4.2 Piping](#42-piping)
+- [5. Cleaning and validating data](#5-cleaning-and-validating-data)
 
 <style type="text/css">
 div.html-widget {
@@ -34,8 +36,6 @@ div.html-widget {
 </style>
 
 <img src="images/tidyverse-logo.png" alt="tidyverse logo" style="float:right;width:180px;"/>
-
-# Data cleaning
 
 Before we start any analysis, we need to make sure our data is properly
 organized and cleaned. In this section, we will work with a dataset to
