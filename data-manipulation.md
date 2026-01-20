@@ -36,48 +36,51 @@ div.html-widget {
 
 <img src="images/tidyverse-logo.png" alt="tidyverse logo" style="float:right;width:180px;"/>
 
-IMPROVE INTRODUCTORY TEXT
+After making sure your data is cleaned, you will want to inspect your
+data in more detail, look for specific trends or associations in our
+data. Part of that will involve manipulating you data to see specific
+subsets or summaries of important variables, and part of that will
+involve making plots and charts to check for trends. We will explore
+data manipulation in this activity, and data visualization in the next
+activity.
 
-When we work with data, it can be useful to work with smaller sections
-of data.
+In the remainder of this activity, we will use piping to filter our
+dataset `productData` based on different conditions, such as: -
+Previewing only the column names that begin with `Product` - Previewing
+only the purchases from Tampa Bay - Previewing only the purchases that
+are corporate orders - Previewing only the purchases from Tampa that
+aren’t critical priority
 
-In the remainder of activity 5, we will look at ways to select subsets
-of our data to make it easier to work with.
-
-- We will use piping to filter productData based on different
-  conditions, such as:
-  - Previewing only the column names that begin with `Product`
-  - Previewing only the purchases from Tampa Bay
-  - Previewing only the purchases that are corporate orders
-  - Previewing only the purchases from Tampa that aren’t critical
-    priority
-
-Before we begin to filter, we need to look at Operators.
+But before we begin to do that, we need to look at operators.
 
 **Definition - “Operators”:** Special symbols or keywords used to
-perform operations on arguments - logical operators specifically
+perform operations on arguments. Logical operators are specifically
 designed for connecting or modifying boolean (true/false) logic
-statements. <br>
+statements.
 
 **Operators**
 
 - Logical operators
-  - \< means “less than”
-  - \<= means “less than or equal to”
-  - \> means “greater than”
-  - \>= means “greater than or equal to”
-  - == means “exactly equal to”
-  - != means “not equal to”
+  - `<` means “less than”
+  - `<=` means “less than or equal to”
+  - `>` means “greater than”
+  - `>=` means “greater than or equal to”
+  - `==` means “exactly equal to”
+  - `!=` means “not equal to”
 - Connecting logical statements:
-  - x \| y means “x or y”
-  - x & y means “x and y”
+  - `x | y` means “x or y”
+  - `x & y` means “x and y”
+
+*Note:* The following activities were drawn from Kaggle’s [Manipulating
+Data with the
+Tidyverse](https://www.kaggle.com/code/rtatman/manipulating-data-with-the-tidyverse/notebook){:target=“\_blank”}.
 
 ## 1. Selecting specific columns
 
 The commands in this section will not create new objects as we won’t be
 using them later on.
 
-**Note: End each command in this section with `%>% head(5)`**
+**Note: End each command in this section with `|> head(5)`**
 
 - Not using that to end commands that extract full columns of data will
   display a LOT.
@@ -85,10 +88,12 @@ using them later on.
 - This will make things easier for you.
 
 - If you were working with your own data, you would not need to add the
-  `%>% head(5)`
+  `|> head(5)`
 
-To get a specific column, use piping and the `select()` function on your
-data set.
+When manipulating your data, you sometimes want to see just some
+variables. To get a specific column, use piping and the `select()`
+function on your data set. This function selects specific columns in a
+data.frame.
 
 - The parameter of `select()` is the name of the column you want to
   access.
@@ -112,9 +117,9 @@ Check your code
 </summary>
 
 ``` r
-#data set %>% select the column titled `Row ID` and view the first 5 items.
-purchaseData %>%
-  select(Row_ID) %>%
+#data set |> select the column titled `Row ID` and view the first 5 items.
+purchaseData |>
+  select(Row_ID) |>
   head(5)
 ```
 
@@ -131,8 +136,6 @@ purchaseData %>%
 
 *Hint:* Begin with the name of the data set, followed by your select
 function passing in the column name as the parameter.
-
-</div>
 
 To select all of the columns from our data set that do *not* start with
 specific text, we do the inverse,
@@ -159,8 +162,8 @@ Check your code
 </summary>
 
 ``` r
-purchaseData %>%
-  select(-Postal_Code) %>%
+purchaseData |>
+  select(-Postal_Code) |>
   head(5)
 ```
 
@@ -199,8 +202,6 @@ purchaseData %>%
 
 {::options parse_block_html='false'/}
 
-</div>
-
 ❗ We can also select a *subset* of columns
 
 - e.g., columns whose names begin with a common string of characters.
@@ -211,14 +212,14 @@ following explains the process.
 
 - Use piping on your purchaseData
 
-  - `purchaseData %>%`
+  - `purchaseData |>`
 
 - Use the `select()` function to select the columns
 
 - Use the `starts_with()` function as the parameter for `select()`. In
   this case, you won’t pipe the results of `select()` into
   `starts_with()`, as you want the select to work on the `start_with()`
-  parameter. That is, they are working simulteanously, and therefore, a
+  parameter. That is, they are working simultaneously, and therefore, a
   pipe won’t work.
 
   - note that you’re selecting all columns that start with a specific
@@ -226,7 +227,8 @@ following explains the process.
     to a specific value
 
 - The parameter for `starts_with()` is the value of the beginning of all
-  columns you want to select.
+  columns you want to select. This should be a character string between
+  quotes.
 
 <div class="task-box" markdown="1">
 
@@ -250,8 +252,8 @@ Check your code
 
 ``` r
 # Selects all columns (and their values) from purchaseData whose names begin with "Product"
-purchaseData %>%
-  select(starts_with("Product")) %>%
+purchaseData |>
+  select(starts_with("Product")) |>
   head(5) # again, remember that this is just for easier visibility, you don't need to have the head() function to select columns
 ```
 
@@ -265,8 +267,6 @@ purchaseData %>%
 </details>
 
 {::options parse_block_html='false'/}
-
-</div>
 
 ## 2. Select specific rows based on a condition
 
@@ -287,6 +287,55 @@ To select items (rows, *not* columns), we use the `filter()` function.
   of the dataset. This expression will return TRUE or FALSE for each
   row, and the function will return the rows that were TRUE.
 
+For example, imagine you only want to analyse data of purchase orders
+from a certain country. You can filter those rows and create a new data
+frame to be used for analysis:
+
+``` r
+# Create a new data frame only with data from Canada
+purchaseData_CA <- purchaseData |> 
+  filter(Country == "Canada")
+
+# Preview new data frame
+head(purchaseData_CA)
+```
+
+    ##   Row_ID                Order_ID Order_Date  Ship_Date      Ship_Mode
+    ## 1  41716 CA-2015-AH1007523-42101 2015-04-07 2015-04-12 Standard Class
+    ## 2  43099   CA-2015-AB10523-42139 2015-05-15 2015-05-15       Same Day
+    ## 3  43100   CA-2015-AB10523-42139 2015-05-15 2015-05-15       Same Day
+    ## 4  49151   CA-2013-AS13523-41403 2013-05-09 2013-05-13 Standard Class
+    ## 5  47228   CA-2014-AB16523-41660 2014-01-21 2014-01-21       Same Day
+    ## 6  42998   CA-2012-AH19523-41129 2012-08-08 2012-08-12 Standard Class
+    ##   Customer_ID Customer_Name     Segment Postal_Code     City   State Country
+    ## 1  AH-1007523     Adam Hart   Corporate          NA Oakville Ontario  Canada
+    ## 2    AB-10523 Adrian Barton    Consumer          NA  Toronto Ontario  Canada
+    ## 3    AB-10523 Adrian Barton    Consumer          NA  Toronto Ontario  Canada
+    ## 4    AS-13523  Adrian Shami Home Office          NA Edmonton Alberta  Canada
+    ## 5    AB-16523   Alan Barnes    Consumer          NA Hamilton Ontario  Canada
+    ## 6    AH-19523   Alan Haines   Corporate          NA Waterloo Ontario  Canada
+    ##   Region Market  Product_ID        Category Sub_Category
+    ## 1 Canada   USCA OFF-ST-4257 Office Supplies      Storage
+    ## 2 Canada   USCA OFF-AR-6111 Office Supplies          Art
+    ## 3 Canada   USCA OFF-AR-5912 Office Supplies          Art
+    ## 4 Canada   USCA OFF-ST-5695 Office Supplies      Storage
+    ## 5 Canada   USCA OFF-AR-3475 Office Supplies          Art
+    ## 6 Canada   USCA OFF-EN-3089 Office Supplies    Envelopes
+    ##                             Product_Name  Sales Quantity Discount Profit
+    ## 1               Fellowes File Cart, Blue 137.31        1        0  54.90
+    ## 2       Stanley Highlighters, Easy-Erase  29.94        2        0  10.74
+    ## 3      Sanford Highlighters, Fluorescent  34.02        2        0  14.28
+    ## 4             Rogers Folders, Industrial 187.02        6        0  26.10
+    ## 5            Binney & Smith Canvas, Blue 410.88        8        0  78.00
+    ## 6 Ames Business Envelopes, Security-Tint  87.84        6        0  29.70
+    ##   Shipping_Cost Order_Priority
+    ## 1         11.13           High
+    ## 2          5.81           High
+    ## 3          2.83           High
+    ## 4          6.96         Medium
+    ## 5         59.79           High
+    ## 6          7.97         Medium
+
 <div class="task-box" markdown="1">
 
 ⭐ <u>Task 2-4</u>
@@ -295,6 +344,9 @@ To select items (rows, *not* columns), we use the `filter()` function.
 
 Filter all the rows from your purchase data where `Quantity` is greater
 than 10.
+
+You do not need to save this in a new data frame, but use the `head(5)`
+function to reduce number of rows to be viewed.
 
 {::options parse_block_html='true' /}
 <details>
@@ -305,8 +357,8 @@ Check your code
 </summary>
 
 ``` r
-purchaseData %>%
-  filter(Quantity > 10) %>%
+purchaseData |>
+  filter(Quantity > 10) |>
   head(5) # again, this is just for easier viewing now, but without this, you would see ALL rows that have Quantity greater than 10
 ```
 
@@ -372,8 +424,8 @@ Check your code
 </summary>
 
 ``` r
-purchaseData %>%
-  filter(City == "Sydney") %>%
+purchaseData |>
+  filter(City == "Sydney") |>
   head(5) # again, this is just for easier viewing now, but without this, you would see ALL rows that have Sidney listed as City
 ```
 
@@ -427,9 +479,8 @@ Create a new data frame with all the rows from purchaseData where
 
 - Name this data frame: `discountedUSPurchases`
 
-- Do not add ” %\>% head(5)” to the command when <u>creating</u> a new
-  data frame. We were just using this to <u>view</u> subsets of the
-  data.
+- Do not add `|> head(5)` to the command when *creating* a new data
+  frame. We were just using this to *view* subsets of the data.
 
 {::options parse_block_html='true' /}
 <details>
@@ -441,11 +492,11 @@ Check your code
 
 ``` r
 # Create the dataframe
-discountedUSPurchases <- purchaseData %>%
+discountedUSPurchases <- purchaseData |>
                           filter(Country == "United States" & Discount > 0)
 
 # View your data frame
-discountedUSPurchases %>%
+discountedUSPurchases |>
   head(5)
 ```
 
@@ -488,8 +539,6 @@ discountedUSPurchases %>%
 multiple cases like filtering my two variables<br> - e.g., values of the
 `Country` and `Discount` columns.
 
-</div>
-
 ------------------------------------------------------------------------
 
 📍 Reminder! Save your work
@@ -498,7 +547,9 @@ multiple cases like filtering my two variables<br> - e.g., values of the
 
 ## 3. Modify a data frame with `mutate()`
 
-“Mutation” involves creating or altering columns in a data frame,
+“Mutation” involves creating or altering columns in a data frame. This
+is useful when you want to create new variables based on other existing
+variables, for example.
 
 - using the `mutate()` function
   - e.g., If you have a column with a range of numbers, but you want to
@@ -507,17 +558,17 @@ multiple cases like filtering my two variables<br> - e.g., values of the
     and the values would be TRUE or FALSE.
 - adds new variables or modifies existing ones.
 
-<br> <u>Here’s how we’ll do it:</u>
+**Here’s how we’ll do it:**
 
 - Assign the mutation (modification) to the existing dataframe (or new
   object if you want to create a new one rather than adding a new column
   to an existing one)
-  - `existing_dataframe_name <-`
-- Identify the existing name of the object you want to mutate
+  - `existing_dataframe_name <-` Identify the existing name of the
+    object you want to mutate
   - `existing_dataframe_name`
 - Use a pipe to identify the action being performed on our existing
   object
-  - `%>%`
+  - `|>`
 - Identify that the action being performed on the existing object is the
   mutation
   - using the `mutate()` function
@@ -537,11 +588,12 @@ multiple cases like filtering my two variables<br> - e.g., values of the
           and FALSE otherwise
 
 ``` r
-purchaseData <- purchaseData %>%
-      mutate(Low_Priority = (Order_Priority == "Low"))
+purchaseData <- purchaseData |>
+  # Create new column that identifies when priority is low
+  mutate(Low_Priority = (Order_Priority == "Low"))
 
-#view first 3 rows of your data frame
-purchaseData %>%
+# view first 3 rows of your data frame
+purchaseData |>
     head(3)
 ```
 
@@ -593,11 +645,11 @@ Check your code
 </summary>
 
 ``` r
-purchaseData <- purchaseData %>%
+purchaseData <- purchaseData |>
   mutate(High_Shipping = (Shipping_Cost > 100))
 
 #view your data frame
-purchaseData %>%
+purchaseData |>
   head(5)
 ```
 
@@ -660,7 +712,7 @@ new variable.
 Here’s how you can do that using the `mutate()` function
 
 ``` r
-purchaseData <- purchaseData %>% # Get the purchaseData object
+purchaseData <- purchaseData |> # Get the purchaseData object
   mutate( # identify that you want to mutate variables
     # Different variables that are being mutated inside the mutate function
     # should be separated by comma
@@ -671,7 +723,7 @@ purchaseData <- purchaseData %>% # Get the purchaseData object
   )
 
 # View the dataset
-purchaseData %>%
+purchaseData |>
   head(5)
 ```
 
@@ -724,12 +776,6 @@ to the values of a specific variable.
 - Parameter of `arrange()` is the column you want to use to sort your
   data frame
 
-- This is particularly handy for swiftly identifying which measurements
-  recorded the highest or lowest values.
-
-When using `arrange()`, you specify the column name that you wish to
-organize by.
-
 *hint*: You can also use the `sort()` function but it only takes a
 vector parameter, not a data frame.
 
@@ -750,11 +796,12 @@ Check your code
 </summary>
 
 ``` r
-purchaseData <- purchaseData %>%
-                    arrange(Sales)
+# Sort the purchaseData darafrae by the price of sales
+purchaseData <- purchaseData |>
+  arrange(Sales)
 
 # View your data frame
-purchaseData %>%
+purchaseData |>
   head(5)
 ```
 
@@ -808,10 +855,13 @@ purchaseData %>%
 The `summarise()` function synthesizes information into a data frame
 with information like totals, averages, medians, and so on. It reduces
 the number of rows in the dataframe by summarizing information from
-multiple rows into one value (e.g., mean value)
+multiple rows into one value (e.g., mean value). This is very helpful at
+early stages to investigate your data.
 
 - `summarise()` takes an unlimited number of parameters, where each
-  parameter will appear as a column. <br>
+  parameter will appear as a column.
+- for each of those parameter (i.e. new columns), you should specify
+  which summary you want the function to perform
 
 <div class="task-box" markdown="1">
 
@@ -835,7 +885,7 @@ Check your code
 
 ``` r
 # Only purchases made in the US with discounts (we created this object before)
-discountedUSPurchases %>% 
+discountedUSPurchases |> 
    summarise( # call the summarise() function. It is helpful to break the parameters into different lines to see the new columns you are creating
         meanSales = mean(Sales),    #average sale price 
         meanDiscount = mean(Discount) # and average discount
@@ -846,7 +896,7 @@ discountedUSPurchases %>%
     ## 1  232.7353    0.3004407
 
 ``` r
-#To retrieve this data later, assign this command to a new variable.
+#To retrieve this data later, assign this command to a new object.
 ```
 
 </details>
@@ -898,9 +948,11 @@ Check your code
 
 ``` r
 # Only purchases made in the US with discounts
-USCityProfits <- discountedUSPurchases %>% 
-      group_by(City) %>% # group by city purchase was made in
-      summarise(totalProfit = sum(Profit)) # total profit for each city
+USCityProfits <- discountedUSPurchases |> 
+  # group by city purchase was made in
+  group_by(City) |> 
+  # summarise total profit for each city by summing the profit
+  summarise(totalProfit = sum(Profit)) 
 
 # Now view your results
 USCityProfits
@@ -937,8 +989,8 @@ frames, but are just printed differently in the console as an ouput.
 
 The table will be sorted by city, alphabetically
 
-Optional activities: You can now use the functions you just learned to
-review this new data frame.
+**Optional activities**: You can now use the functions you just learned
+to review this new data frame.
 
 ⭐ **Sort the table by `Profit` using the `arrange()` function to order
 it by the lowest profitable city to the highest profitable city.**
@@ -954,8 +1006,8 @@ Check your code
 </summary>
 
 ``` r
-USCityProfits <- USCityProfits %>%
-                        arrange(totalProfit)
+USCityProfits <- USCityProfits |>
+  arrange(totalProfit)
 ```
 
 </details>
@@ -976,7 +1028,7 @@ Check your code
 
 ``` r
 # Least profitable are at the top of our data frame, since `arrange()` puts data in ascending order by default. 
-USCityProfits %>%
+USCityProfits |>
     head(5)
 ```
 
@@ -1007,7 +1059,7 @@ Check your code
 
 ``` r
 # Most profitable are at the end of our data frame
-USCityProfits %>%
+USCityProfits |>
         tail(5)
 ```
 
@@ -1061,3 +1113,11 @@ details {
 
 [NEXT STEP: Data Visualization](data-vizualization.html){: .btn
 .btn-blue }
+
+</div>
+
+</div>
+
+</div>
+
+</div>
