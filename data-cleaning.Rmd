@@ -10,6 +10,11 @@ output:
     preserve_yaml: TRUE # keep Jekyll front-matter
 ---
 
+<!-- TO-DOS -->
+<!-- add use of str() function to check data. Actually, add all the cleaning part from the data visualization page from intro to R workshop -->
+<!-- add use of assertR to validate your data -->
+
+
 ```{r setup, include=FALSE}
 # This code block is to the benefit of anyone working with the .Rmd file to edit the workshop material, rather than participating in the workshop. Hence, it should always be setup to include = FALSE, so it does not appear in the knitted .md file 
 
@@ -561,7 +566,7 @@ If you want to know more about pipe, and how it is more intuitive than other way
 
 ## 5. Cleaning and validating data
 
-CONTENT TO BE ADDED
+CONTENT TO BE ADDED. USING janitor AND assertr PACKAGES
 
 
 <script>  

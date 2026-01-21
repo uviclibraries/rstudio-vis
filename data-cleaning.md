@@ -10,6 +10,12 @@ output:
     preserve_yaml: TRUE # keep Jekyll front-matter
 ---
 
+<!-- TO-DOS -->
+
+<!-- add use of str() function to check data. Actually, add all the cleaning part from the data visualization page from intro to R workshop -->
+
+<!-- add use of assertR to validate your data -->
+
 # Data Cleaning
 
 - [1. Getting ready: installing
@@ -692,7 +698,7 @@ other ways to write code, check out
 
 ## 5. Cleaning and validating data
 
-CONTENT TO BE ADDED
+CONTENT TO BE ADDED. USING janitor AND assertr PACKAGES
 
 <script>  
 function toggle(input) {

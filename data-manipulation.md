@@ -37,7 +37,7 @@ div.html-widget {
 <img src="images/tidyverse-logo.png" alt="tidyverse logo" style="float:right;width:180px;"/>
 
 After making sure your data is cleaned, you will want to inspect your
-data in more detail, look for specific trends or associations in our
+data in more detail, and look for specific trends or associations in our
 data. Part of that will involve manipulating you data to see specific
 subsets or summaries of important variables, and part of that will
 involve making plots and charts to check for trends. We will explore

@@ -66,7 +66,7 @@ div.html-widget {
 purchaseData <- read.csv("docs/Global_Superstore_Orders_2016.csv")
 ```
 
-After making sure your data is cleaned, you will want to inspect your data in more detail, look for specific trends or associations in our data. Part of that will involve manipulating you data to see specific subsets or summaries of important variables, and part of that will involve making plots and charts to check for trends. We will explore data manipulation in this activity, and data visualization in the next activity.
+After making sure your data is cleaned, you will want to inspect your data in more detail, and look for specific trends or associations in our data. Part of that will involve manipulating you data to see specific subsets or summaries of important variables, and part of that will involve making plots and charts to check for trends. We will explore data manipulation in this activity, and data visualization in the next activity.
 
 In the remainder of this activity, we will use piping to filter our dataset `productData` based on different conditions, such as:
   - Previewing only the column names that begin with `Product`
