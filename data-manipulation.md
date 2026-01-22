@@ -12,9 +12,10 @@ output:
 
 # Data manipulation
 
-- [1. Selecting specific columns](#1-selecting-specific-columns)
-- [2. Select specific rows based on a
-  condition](#2-select-specific-rows-based-on-a-condition)
+- [1. Selecting specific columns with
+  `select()`](#1-selecting-specific-columns-with-select)
+- [2. Select specific rows
+  `filter()`](#2-select-specific-rows-with-filter)
 - [3. Modify a data frame with
   `mutate()`](3-modify-a-data-frame-with-mutate)
 - [4. Sorting data with `arrange()`](#4-sorting-data-with-arrange)
@@ -36,13 +37,15 @@ div.html-widget {
 
 <img src="images/tidyverse-logo.png" alt="tidyverse logo" style="float:right;width:180px;"/>
 
-After making sure your data is cleaned, you will want to inspect your
-data in more detail, and look for specific trends or associations in our
-data. Part of that will involve manipulating you data to see specific
-subsets or summaries of important variables, and part of that will
-involve making plots and charts to check for trends. We will explore
-data manipulation in this activity, and data visualization in the next
-activity.
+After making sure your data is cleaned and validated, you will want to
+inspect your data in more detail, and look for specific trends or
+associations in our data. Part of that will involve manipulating you
+data to see specific subsets or summaries of important variables, and
+part of that will involve making plots and charts to check for trends.
+We will explore data manipulation in this activity, and data
+visualization in the next activity. We will use the cleaned dataset that
+we finished your previous activity, so you can continue writing in the
+same script.
 
 In the remainder of this activity, we will use piping to filter our
 dataset `productData` based on different conditions, such as: -
@@ -75,7 +78,7 @@ statements.
 Data with the
 Tidyverse](https://www.kaggle.com/code/rtatman/manipulating-data-with-the-tidyverse/notebook){:target=“\_blank”}.
 
-## 1. Selecting specific columns
+## 1. Selecting specific columns with `select()`
 
 The commands in this section will not create new objects as we won’t be
 using them later on.
@@ -119,11 +122,11 @@ Check your code
 ``` r
 #data set |> select the column titled `Row ID` and view the first 5 items.
 purchaseData |>
-  select(Row_ID) |>
+  select(row_id) |>
   head(5)
 ```
 
-    ##   Row_ID
+    ##   row_id
     ## 1  40098
     ## 2  26341
     ## 3  25330
@@ -165,35 +168,35 @@ Check your code
 
 ``` r
 purchaseData |>
-  select(-Postal_Code) |>
+  select(-postal_code) |>
   head(5)
 ```
 
-    ##   Row_ID                 Order_ID Order_Date  Ship_Date    Ship_Mode
+    ##   row_id                 order_id order_date  ship_date    ship_mode
     ## 1  40098 CA-2014-AB10015140-41954 2014-11-11 2014-11-13  First Class
     ## 2  26341   IN-2014-JR162107-41675 2014-02-05 2014-02-07 Second Class
     ## 3  25330   IN-2014-CR127307-41929 2014-10-17 2014-10-18  First Class
     ## 4  13524  ES-2014-KM1637548-41667 2014-01-28 2014-01-30  First Class
     ## 5  47221  SG-2014-RH9495111-41948 2014-11-05 2014-11-06     Same Day
-    ##    Customer_ID    Customer_Name     Segment          City           State
+    ##    customer_id    customer_name     segment          city           state
     ## 1 AB-100151402    Aaron Bergman    Consumer Oklahoma City        Oklahoma
     ## 2    JR-162107    Justin Ritter   Corporate    Wollongong New South Wales
     ## 3    CR-127307     Craig Reiter    Consumer      Brisbane      Queensland
     ## 4   KM-1637548 Katherine Murray Home Office        Berlin          Berlin
     ## 5   RH-9495111      Rick Hansen    Consumer         Dakar           Dakar
-    ##         Country         Region       Market  Product_ID   Category Sub_Category
+    ##         country         region       market  product_id   category sub_category
     ## 1 United States     Central US         USCA TEC-PH-5816 Technology       Phones
     ## 2     Australia        Oceania Asia Pacific FUR-CH-5379  Furniture       Chairs
     ## 3     Australia        Oceania Asia Pacific TEC-PH-5356 Technology       Phones
     ## 4       Germany Western Europe       Europe TEC-PH-5267 Technology       Phones
     ## 5       Senegal Western Africa       Africa TEC-CO-6011 Technology      Copiers
-    ##                                Product_Name   Sales Quantity Discount  Profit
+    ##                                product_name   sales quantity discount  profit
     ## 1                          Samsung Convoy 3  221.98        2      0.0   62.15
     ## 2 Novimex Executive Leather Armchair, Black 3709.40        9      0.1 -288.77
     ## 3         Nokia Smart Phone, with Caller ID 5175.17        9      0.1  919.97
     ## 4            Motorola Smart Phone, Cordless 2892.51        5      0.1  -96.54
     ## 5            Sharp Wireless Fax, High-Speed 2832.96        8      0.0  311.52
-    ##   Shipping_Cost Order_Priority
+    ##   shipping_cost order_priority
     ## 1         40.77           High
     ## 2        923.63       Critical
     ## 3        915.49         Medium
@@ -241,7 +244,7 @@ following explains the process.
 **Get a set of columns from a data frame**
 
 Select all the columns from our cleaned purchase data that start with
-“Product”.
+“product”.
 
 Write the one-line command to achieve this with piping and the
 `starts_with()` function
@@ -255,13 +258,13 @@ Check your code
 </summary>
 
 ``` r
-# Selects all columns (and their values) from purchaseData whose names begin with "Product"
+# Selects all columns (and their values) from purchaseData whose names begin with "product"
 purchaseData |>
-  select(starts_with("Product")) |>
+  select(starts_with("product")) |>
   head(5) # again, remember that this is just for easier visibility, you don't need to have the head() function to select columns
 ```
 
-    ##    Product_ID                              Product_Name
+    ##    product_id                              product_name
     ## 1 TEC-PH-5816                          Samsung Convoy 3
     ## 2 FUR-CH-5379 Novimex Executive Leather Armchair, Black
     ## 3 TEC-PH-5356         Nokia Smart Phone, with Caller ID
@@ -274,7 +277,7 @@ purchaseData |>
 
 </div>
 
-## 2. Select specific rows based on a condition
+## 2. Select specific rows with `filter()`
 
 We may also want to handle certain items (rows) in our data set based on
 certain criteria.
@@ -300,41 +303,41 @@ frame to be used for analysis:
 ``` r
 # Create a new data frame only with data from Canada
 purchaseData_CA <- purchaseData |> 
-  filter(Country == "Canada")
+  filter(country == "Canada")
 
 # Preview new data frame
 head(purchaseData_CA)
 ```
 
-    ##   Row_ID                Order_ID Order_Date  Ship_Date      Ship_Mode
+    ##   row_id                order_id order_date  ship_date      ship_mode
     ## 1  41716 CA-2015-AH1007523-42101 2015-04-07 2015-04-12 Standard Class
     ## 2  43099   CA-2015-AB10523-42139 2015-05-15 2015-05-15       Same Day
     ## 3  43100   CA-2015-AB10523-42139 2015-05-15 2015-05-15       Same Day
     ## 4  49151   CA-2013-AS13523-41403 2013-05-09 2013-05-13 Standard Class
     ## 5  47228   CA-2014-AB16523-41660 2014-01-21 2014-01-21       Same Day
     ## 6  42998   CA-2012-AH19523-41129 2012-08-08 2012-08-12 Standard Class
-    ##   Customer_ID Customer_Name     Segment Postal_Code     City   State Country
+    ##   customer_id customer_name     segment postal_code     city   state country
     ## 1  AH-1007523     Adam Hart   Corporate          NA Oakville Ontario  Canada
     ## 2    AB-10523 Adrian Barton    Consumer          NA  Toronto Ontario  Canada
     ## 3    AB-10523 Adrian Barton    Consumer          NA  Toronto Ontario  Canada
     ## 4    AS-13523  Adrian Shami Home Office          NA Edmonton Alberta  Canada
     ## 5    AB-16523   Alan Barnes    Consumer          NA Hamilton Ontario  Canada
     ## 6    AH-19523   Alan Haines   Corporate          NA Waterloo Ontario  Canada
-    ##   Region Market  Product_ID        Category Sub_Category
+    ##   region market  product_id        category sub_category
     ## 1 Canada   USCA OFF-ST-4257 Office Supplies      Storage
     ## 2 Canada   USCA OFF-AR-6111 Office Supplies          Art
     ## 3 Canada   USCA OFF-AR-5912 Office Supplies          Art
     ## 4 Canada   USCA OFF-ST-5695 Office Supplies      Storage
     ## 5 Canada   USCA OFF-AR-3475 Office Supplies          Art
     ## 6 Canada   USCA OFF-EN-3089 Office Supplies    Envelopes
-    ##                             Product_Name  Sales Quantity Discount Profit
+    ##                             product_name  sales quantity discount profit
     ## 1               Fellowes File Cart, Blue 137.31        1        0  54.90
     ## 2       Stanley Highlighters, Easy-Erase  29.94        2        0  10.74
     ## 3      Sanford Highlighters, Fluorescent  34.02        2        0  14.28
     ## 4             Rogers Folders, Industrial 187.02        6        0  26.10
     ## 5            Binney & Smith Canvas, Blue 410.88        8        0  78.00
     ## 6 Ames Business Envelopes, Security-Tint  87.84        6        0  29.70
-    ##   Shipping_Cost Order_Priority
+    ##   shipping_cost order_priority
     ## 1         11.13           High
     ## 2          5.81           High
     ## 3          2.83           High
@@ -348,7 +351,7 @@ head(purchaseData_CA)
 
 **Filter conditionally**
 
-Filter all the rows from your purchase data where `Quantity` is greater
+Filter all the rows from your purchase data where `quantity` is greater
 than 10.
 
 You do not need to save this in a new data frame, but use the `head(5)`
@@ -364,41 +367,41 @@ Check your code
 
 ``` r
 purchaseData |>
-  filter(Quantity > 10) |>
+  filter(quantity > 10) |>
   head(5) # again, this is just for easier viewing now, but without this, you would see ALL rows that have Quantity greater than 10
 ```
 
-    ##   Row_ID                 Order_ID Order_Date  Ship_Date      Ship_Mode
+    ##   row_id                 order_id order_date  ship_date      ship_mode
     ## 1  27704  IN-2014-PF1912027-41796 2014-06-06 2014-06-08   Second Class
     ## 2  12069  ES-2015-PJ1883564-42255 2015-09-08 2015-09-14 Standard Class
     ## 3  15380 ES-2015-PO18865139-42018 2015-01-14 2015-01-18 Standard Class
     ## 4  25795  IN-2015-VG2180558-42273 2015-09-26 2015-09-28   Second Class
     ## 5   6550 MX-2015-JH15820141-42356 2015-12-18 2015-12-20   Second Class
-    ##   Customer_ID     Customer_Name   Segment Postal_Code               City
+    ##   customer_id     customer_name   segment postal_code               city
     ## 1  PF-1912027      Peter Fuller  Consumer          NA         Mudanjiang
     ## 2  PJ-1883564     Patrick Jones Corporate          NA              Prato
     ## 3 PO-18865139 Patrick O'Donnell  Consumer          NA   Stockton-on-Tees
     ## 4  VG-2180558       Vivek Grady Corporate          NA Thiruvananthapuram
     ## 5 JH-15820141       John Huston  Consumer          NA           Paysandú
-    ##          State        Country          Region       Market  Product_ID
+    ##          state        country          region       market  product_id
     ## 1 Heilongjiang          China    Eastern Asia Asia Pacific OFF-AP-4959
     ## 2      Tuscany          Italy Southern Europe       Europe OFF-AP-4743
     ## 3      England United Kingdom Northern Europe       Europe TEC-CO-3598
     ## 4       Kerala          India   Southern Asia Asia Pacific FUR-BO-5951
     ## 5     Paysandú        Uruguay   South America        LATAM FUR-CH-4531
-    ##          Category Sub_Category
+    ##          category sub_category
     ## 1 Office Supplies   Appliances
     ## 2 Office Supplies   Appliances
     ## 3      Technology      Copiers
     ## 4       Furniture    Bookcases
     ## 5       Furniture       Chairs
-    ##                                          Product_Name   Sales Quantity Discount
+    ##                                          product_name   sales quantity discount
     ## 1                         KitchenAid Microwave, White 3701.52       12        0
     ## 2                                   Hoover Stove, Red 7958.58       14        0
     ## 3                          Brother Fax Machine, Laser 4141.02       13        0
     ## 4                Sauder Classic Bookcase, Traditional 5667.87       13        0
     ## 5 Harbour Creations Executive Leather Armchair, Black 3473.14       11        0
-    ##    Profit Shipping_Cost Order_Priority
+    ##    profit shipping_cost order_priority
     ## 1 1036.08        804.54       Critical
     ## 2 3979.08        778.32            Low
     ## 3 1697.67        668.96           High
@@ -419,7 +422,7 @@ purchaseData |>
 
 **Filter conditionally**
 
-Filter all the rows from your purchase data where `City` is “Sydney”.
+Filter all the rows from your purchase data where `city` is “Sydney”.
 
 {::options parse_block_html='true' /}
 <details>
@@ -431,35 +434,35 @@ Check your code
 
 ``` r
 purchaseData |>
-  filter(City == "Sydney") |>
+  filter(city == "Sydney") |>
   head(5) # again, this is just for easier viewing now, but without this, you would see ALL rows that have Sidney listed as City
 ```
 
-    ##   Row_ID               Order_ID Order_Date  Ship_Date      Ship_Mode
+    ##   row_id               order_id order_date  ship_date      ship_mode
     ## 1  22732 IN-2014-JM156557-41818 2014-06-28 2014-07-01   Second Class
     ## 2  25026 IN-2013-RP192707-41438 2013-06-13 2013-06-13       Same Day
     ## 3  29629 IN-2014-LC168857-41747 2014-04-18 2014-04-19    First Class
     ## 4  21263 IN-2015-MB173057-42179 2015-06-24 2015-06-28 Standard Class
     ## 5  20521 IN-2015-BE114557-42080 2015-03-17 2015-03-22   Second Class
-    ##   Customer_ID   Customer_Name     Segment Postal_Code   City           State
+    ##   customer_id   customer_name     segment postal_code   city           state
     ## 1   JM-156557     Jim Mitchum   Corporate          NA Sydney New South Wales
     ## 2   RP-192707    Rachel Payne   Corporate          NA Sydney New South Wales
     ## 3   LC-168857  Lena Creighton    Consumer          NA Sydney New South Wales
     ## 4   MB-173057 Maria Bertelson    Consumer          NA Sydney New South Wales
     ## 5   BE-114557      Brad Eason Home Office          NA Sydney New South Wales
-    ##     Country  Region       Market  Product_ID   Category Sub_Category
+    ##     country  region       market  product_id   category sub_category
     ## 1 Australia Oceania Asia Pacific TEC-PH-5842 Technology       Phones
     ## 2 Australia Oceania Asia Pacific TEC-CO-3611 Technology      Copiers
     ## 3 Australia Oceania Asia Pacific TEC-CO-6012 Technology      Copiers
     ## 4 Australia Oceania Asia Pacific FUR-BO-5948  Furniture    Bookcases
     ## 5 Australia Oceania Asia Pacific TEC-CO-4568 Technology      Copiers
-    ##                          Product_Name   Sales Quantity Discount  Profit
+    ##                          product_name   sales quantity discount  profit
     ## 1 Samsung Smart Phone, with Caller ID 2862.68        5      0.1  763.28
     ## 2         Brother Wireless Fax, Laser 3068.36        9      0.1 1124.90
     ## 3           Sharp Wireless Fax, Laser 1601.64        5      0.1  587.19
     ## 4      Sauder Classic Bookcase, Metal 5486.67       14      0.1 2316.51
     ## 5         Hewlett Copy Machine, Color 3299.56       14      0.1  366.28
-    ##   Shipping_Cost Order_Priority
+    ##   shipping_cost order_priority
     ## 1        897.35       Critical
     ## 2        555.77           High
     ## 3        511.47       Critical
@@ -481,7 +484,7 @@ purchaseData |>
 **Create a data frame**
 
 Create a new data frame with all the rows from purchaseData where
-`Country` is “United States” and `Discount` is greater than 0.
+`country` is “United States” and `discount` is greater than 0.
 
 - Name this data frame: `discountedUSPurchases`
 
@@ -499,38 +502,38 @@ Check your code
 ``` r
 # Create the dataframe
 discountedUSPurchases <- purchaseData |>
-                          filter(Country == "United States" & Discount > 0)
+                          filter(country == "United States" & discount > 0)
 
 # View your data frame
 discountedUSPurchases |>
   head(5)
 ```
 
-    ##   Row_ID                 Order_ID Order_Date  Ship_Date      Ship_Mode
+    ##   row_id                 order_id order_date  ship_date      ship_mode
     ## 1  36258 CA-2012-AB10015140-40974 2012-03-06 2012-03-07    First Class
     ## 2  39519 CA-2012-AB10015140-40958 2012-02-19 2012-02-25 Standard Class
     ## 3  40977 CA-2013-AH10030140-41635 2013-12-27 2013-12-31 Standard Class
     ## 4  36651 CA-2012-AH10030140-41041 2012-05-12 2012-05-18 Standard Class
     ## 5  37425 US-2012-AH10030140-41206 2012-10-24 2012-10-27    First Class
-    ##    Customer_ID Customer_Name   Segment Postal_Code          City      State
+    ##    customer_id customer_name   segment postal_code          city      state
     ## 1 AB-100151404 Aaron Bergman  Consumer       98103       Seattle Washington
     ## 2 AB-100151402 Aaron Bergman  Consumer       76017     Arlington      Texas
     ## 3 AH-100301404 Aaron Hawkins Corporate       94122 San Francisco California
     ## 4 AH-100301404 Aaron Hawkins Corporate       90004   Los Angeles California
     ## 5 AH-100301404 Aaron Hawkins Corporate       94109 San Francisco California
-    ##         Country     Region Market  Product_ID        Category Sub_Category
+    ##         country     region market  product_id        category sub_category
     ## 1 United States Western US   USCA FUR-CH-4421       Furniture       Chairs
     ## 2 United States Central US   USCA OFF-ST-3078 Office Supplies      Storage
     ## 3 United States Western US   USCA TEC-PH-4389      Technology       Phones
     ## 4 United States Western US   USCA FUR-CH-4840       Furniture       Chairs
     ## 5 United States Western US   USCA OFF-BI-4372 Office Supplies      Binders
-    ##                                    Product_Name  Sales Quantity Discount Profit
+    ##                                    product_name  sales quantity discount profit
     ## 1    Global Push Button Manager's Chair, Indigo  48.71        1      0.2   5.48
     ## 2                            Akro Stacking Bins  12.62        2      0.2  -2.52
     ## 3                          Geemarc AmpliPOWER60 668.16        9      0.2  75.17
     ## 4 Iceberg Nesting Folding Chair, 19w x 6d x 43h 279.46        6      0.2  20.96
     ## 5                       GBC VeloBind Cover Sets  49.41        4      0.2  18.53
-    ##   Shipping_Cost Order_Priority
+    ##   shipping_cost order_priority
     ## 1         11.13           High
     ## 2          1.97            Low
     ## 3         45.74         Medium
@@ -589,7 +592,7 @@ variables, for example.
       the new variable
   - Say we want to add a column that has a TRUE/FALSE variable (aka
     boolean) for whether the order priority is low.
-    - The expression will be `Order_Priority == "Low"`
+    - The expression will be `order_priority == "Low"`
       - `==` means “the left value is equal to the right value”
         - The result will be a vector with TRUE or FALSE, with TRUE for
           every row in the data is “Low” in the “Order_Priority” column,
@@ -598,30 +601,30 @@ variables, for example.
 ``` r
 purchaseData <- purchaseData |>
   # Create new column that identifies when priority is low
-  mutate(Low_Priority = (Order_Priority == "Low"))
+  mutate(low_priority = (order_priority == "Low"))
 
 # view first 3 rows of your data frame
 purchaseData |>
     head(3)
 ```
 
-    ##   Row_ID                 Order_ID Order_Date  Ship_Date    Ship_Mode
+    ##   row_id                 order_id order_date  ship_date    ship_mode
     ## 1  40098 CA-2014-AB10015140-41954 2014-11-11 2014-11-13  First Class
     ## 2  26341   IN-2014-JR162107-41675 2014-02-05 2014-02-07 Second Class
     ## 3  25330   IN-2014-CR127307-41929 2014-10-17 2014-10-18  First Class
-    ##    Customer_ID Customer_Name   Segment Postal_Code          City
+    ##    customer_id customer_name   segment postal_code          city
     ## 1 AB-100151402 Aaron Bergman  Consumer       73120 Oklahoma City
     ## 2    JR-162107 Justin Ritter Corporate          NA    Wollongong
     ## 3    CR-127307  Craig Reiter  Consumer          NA      Brisbane
-    ##             State       Country     Region       Market  Product_ID   Category
+    ##             state       country     region       market  product_id   category
     ## 1        Oklahoma United States Central US         USCA TEC-PH-5816 Technology
     ## 2 New South Wales     Australia    Oceania Asia Pacific FUR-CH-5379  Furniture
     ## 3      Queensland     Australia    Oceania Asia Pacific TEC-PH-5356 Technology
-    ##   Sub_Category                              Product_Name   Sales Quantity
+    ##   sub_category                              product_name   sales quantity
     ## 1       Phones                          Samsung Convoy 3  221.98        2
     ## 2       Chairs Novimex Executive Leather Armchair, Black 3709.40        9
     ## 3       Phones         Nokia Smart Phone, with Caller ID 5175.17        9
-    ##   Discount  Profit Shipping_Cost Order_Priority Low_Priority
+    ##   discount  profit shipping_cost order_priority low_priority
     ## 1      0.0   62.15         40.77           High        FALSE
     ## 2      0.1 -288.77        923.63       Critical        FALSE
     ## 3      0.1  919.97        915.49         Medium        FALSE
@@ -641,8 +644,8 @@ Now try it yourself. Add a new boolean (TRUE/FALSE) variable (column) to
 the purchase data that identifies whether a purchase’s shipping cost is
 greater than 100 dollars.
 
-- Name the new column: `High_Shipping`
-- The value will be TRUE if the `Shipping_Cost` value is over (`>`) 100.
+- Name the new column: `high_shipping`
+- The value will be TRUE if the `shipping_cost` value is over (`>`) 100.
 
 {::options parse_block_html='true' /}
 <details>
@@ -654,44 +657,44 @@ Check your code
 
 ``` r
 purchaseData <- purchaseData |>
-  mutate(High_Shipping = (Shipping_Cost > 100))
+  mutate(high_shipping = (shipping_cost > 100))
 
 #view your data frame
 purchaseData |>
   head(5)
 ```
 
-    ##   Row_ID                 Order_ID Order_Date  Ship_Date    Ship_Mode
+    ##   row_id                 order_id order_date  ship_date    ship_mode
     ## 1  40098 CA-2014-AB10015140-41954 2014-11-11 2014-11-13  First Class
     ## 2  26341   IN-2014-JR162107-41675 2014-02-05 2014-02-07 Second Class
     ## 3  25330   IN-2014-CR127307-41929 2014-10-17 2014-10-18  First Class
     ## 4  13524  ES-2014-KM1637548-41667 2014-01-28 2014-01-30  First Class
     ## 5  47221  SG-2014-RH9495111-41948 2014-11-05 2014-11-06     Same Day
-    ##    Customer_ID    Customer_Name     Segment Postal_Code          City
+    ##    customer_id    customer_name     segment postal_code          city
     ## 1 AB-100151402    Aaron Bergman    Consumer       73120 Oklahoma City
     ## 2    JR-162107    Justin Ritter   Corporate          NA    Wollongong
     ## 3    CR-127307     Craig Reiter    Consumer          NA      Brisbane
     ## 4   KM-1637548 Katherine Murray Home Office          NA        Berlin
     ## 5   RH-9495111      Rick Hansen    Consumer          NA         Dakar
-    ##             State       Country         Region       Market  Product_ID
+    ##             state       country         region       market  product_id
     ## 1        Oklahoma United States     Central US         USCA TEC-PH-5816
     ## 2 New South Wales     Australia        Oceania Asia Pacific FUR-CH-5379
     ## 3      Queensland     Australia        Oceania Asia Pacific TEC-PH-5356
     ## 4          Berlin       Germany Western Europe       Europe TEC-PH-5267
     ## 5           Dakar       Senegal Western Africa       Africa TEC-CO-6011
-    ##     Category Sub_Category                              Product_Name   Sales
+    ##     category sub_category                              product_name   sales
     ## 1 Technology       Phones                          Samsung Convoy 3  221.98
     ## 2  Furniture       Chairs Novimex Executive Leather Armchair, Black 3709.40
     ## 3 Technology       Phones         Nokia Smart Phone, with Caller ID 5175.17
     ## 4 Technology       Phones            Motorola Smart Phone, Cordless 2892.51
     ## 5 Technology      Copiers            Sharp Wireless Fax, High-Speed 2832.96
-    ##   Quantity Discount  Profit Shipping_Cost Order_Priority Low_Priority
+    ##   quantity discount  profit shipping_cost order_priority low_priority
     ## 1        2      0.0   62.15         40.77           High        FALSE
     ## 2        9      0.1 -288.77        923.63       Critical        FALSE
     ## 3        9      0.1  919.97        915.49         Medium        FALSE
     ## 4        5      0.1  -96.54        910.16         Medium        FALSE
     ## 5        8      0.0  311.52        903.04       Critical        FALSE
-    ##   High_Shipping
+    ##   high_shipping
     ## 1         FALSE
     ## 2          TRUE
     ## 3          TRUE
@@ -712,10 +715,11 @@ based on calculations between two variables. For example, let’s imagine
 you wanted to know how long it takes to ship a product after it is
 ordered to see if the process can be streamlined or improved. To do
 that, you would need to: - Transform your data variables into a date
-data type (a specific type of data that allows for calculating
-differences between dates); - Calculate the difference in days between
-the two date variables (`Order_date` and `Ship_date`) and save it in a
-new variable.
+data type (which allows for calculating differences between dates). You
+did this is in the previous acitivy, but now you are seeing how to do
+this using the mutate function) - Calculate the difference in days
+between the two date variables (`Order_date` and `Ship_date`) and save
+it in a new variable.
 
 Here’s how you can do that using the `mutate()` function
 
@@ -724,10 +728,10 @@ purchaseData <- purchaseData |> # Get the purchaseData object
   mutate( # identify that you want to mutate variables
     # Different variables that are being mutated inside the mutate function
     # should be separated by comma
-    Order_Date = as.Date(Order_Date), # create a variable that is the same as the Order_Date
-    # variable but transformed to date type, and overwrite Order_Date with that new variable
-    Ship_Date = as.Date(Ship_Date), # repeat for the Ship_Date variable
-    days_to_ship = Ship_Date - Order_Date # calculate the difference in days between both dates variables
+    order_date = as.Date(order_date), # create a variable that is the same as the order_date
+    # variable but transformed to date type, and overwrite order_date with that new variable
+    ship_date = as.Date(ship_date), # repeat for the Ship_Date variable
+    days_to_ship = ship_date - order_date # calculate the difference in days between both dates variables
   )
 
 # View the dataset
@@ -735,37 +739,37 @@ purchaseData |>
   head(5)
 ```
 
-    ##   Row_ID                 Order_ID Order_Date  Ship_Date    Ship_Mode
+    ##   row_id                 order_id order_date  ship_date    ship_mode
     ## 1  40098 CA-2014-AB10015140-41954 2014-11-11 2014-11-13  First Class
     ## 2  26341   IN-2014-JR162107-41675 2014-02-05 2014-02-07 Second Class
     ## 3  25330   IN-2014-CR127307-41929 2014-10-17 2014-10-18  First Class
     ## 4  13524  ES-2014-KM1637548-41667 2014-01-28 2014-01-30  First Class
     ## 5  47221  SG-2014-RH9495111-41948 2014-11-05 2014-11-06     Same Day
-    ##    Customer_ID    Customer_Name     Segment Postal_Code          City
+    ##    customer_id    customer_name     segment postal_code          city
     ## 1 AB-100151402    Aaron Bergman    Consumer       73120 Oklahoma City
     ## 2    JR-162107    Justin Ritter   Corporate          NA    Wollongong
     ## 3    CR-127307     Craig Reiter    Consumer          NA      Brisbane
     ## 4   KM-1637548 Katherine Murray Home Office          NA        Berlin
     ## 5   RH-9495111      Rick Hansen    Consumer          NA         Dakar
-    ##             State       Country         Region       Market  Product_ID
+    ##             state       country         region       market  product_id
     ## 1        Oklahoma United States     Central US         USCA TEC-PH-5816
     ## 2 New South Wales     Australia        Oceania Asia Pacific FUR-CH-5379
     ## 3      Queensland     Australia        Oceania Asia Pacific TEC-PH-5356
     ## 4          Berlin       Germany Western Europe       Europe TEC-PH-5267
     ## 5           Dakar       Senegal Western Africa       Africa TEC-CO-6011
-    ##     Category Sub_Category                              Product_Name   Sales
+    ##     category sub_category                              product_name   sales
     ## 1 Technology       Phones                          Samsung Convoy 3  221.98
     ## 2  Furniture       Chairs Novimex Executive Leather Armchair, Black 3709.40
     ## 3 Technology       Phones         Nokia Smart Phone, with Caller ID 5175.17
     ## 4 Technology       Phones            Motorola Smart Phone, Cordless 2892.51
     ## 5 Technology      Copiers            Sharp Wireless Fax, High-Speed 2832.96
-    ##   Quantity Discount  Profit Shipping_Cost Order_Priority Low_Priority
+    ##   quantity discount  profit shipping_cost order_priority low_priority
     ## 1        2      0.0   62.15         40.77           High        FALSE
     ## 2        9      0.1 -288.77        923.63       Critical        FALSE
     ## 3        9      0.1  919.97        915.49         Medium        FALSE
     ## 4        5      0.1  -96.54        910.16         Medium        FALSE
     ## 5        8      0.0  311.52        903.04       Critical        FALSE
-    ##   High_Shipping days_to_ship
+    ##   high_shipping days_to_ship
     ## 1         FALSE       2 days
     ## 2          TRUE       2 days
     ## 3          TRUE       1 days
@@ -806,44 +810,44 @@ Check your code
 ``` r
 # Sort the purchaseData darafrae by the price of sales
 purchaseData <- purchaseData |>
-  arrange(Sales)
+  arrange(sales)
 
 # View your data frame
 purchaseData |>
   head(5)
 ```
 
-    ##   Row_ID                 Order_ID Order_Date  Ship_Date      Ship_Mode
+    ##   row_id                 order_id order_date  ship_date      ship_mode
     ## 1  35398 US-2015-ZC21910140-42175 2015-06-20 2015-06-24 Standard Class
     ## 2  40589 CA-2015-RS19765140-42066 2015-03-03 2015-03-03       Same Day
     ## 3  39955 CA-2014-KB16600140-41812 2014-06-22 2014-06-26 Standard Class
     ## 4  36008 CA-2012-JO15280140-40998 2012-03-30 2012-03-30       Same Day
     ## 5  33403 US-2012-HG14965140-41177 2012-09-25 2012-09-25       Same Day
-    ##    Customer_ID    Customer_Name   Segment Postal_Code         City        State
+    ##    customer_id    customer_name   segment postal_code         city        state
     ## 1 ZC-219101402 Zuschuss Carroll  Consumer       77095      Houston        Texas
     ## 2 RS-197651402   Roland Schwarz Corporate       76706         Waco        Texas
     ## 3 KB-166001402      Ken Brennan Corporate       60623      Chicago     Illinois
     ## 4 JO-152801406    Jas O'Carroll  Consumer       19120 Philadelphia Pennsylvania
     ## 5 HG-149651402    Henry Goldwyn Corporate       75150     Mesquite        Texas
-    ##         Country     Region Market  Product_ID        Category Sub_Category
+    ##         country     region market  product_id        category sub_category
     ## 1 United States Central US   USCA OFF-AP-4739 Office Supplies   Appliances
     ## 2 United States Central US   USCA OFF-BI-2935 Office Supplies      Binders
     ## 3 United States Central US   USCA OFF-BI-3268 Office Supplies      Binders
     ## 4 United States Eastern US   USCA OFF-BI-3318 Office Supplies      Binders
     ## 5 United States Central US   USCA OFF-BI-2880 Office Supplies      Binders
-    ##                                                                 Product_Name
+    ##                                                                 product_name
     ## 1 Hoover Replacement Belt for Commercial Guardsman Heavy-Duty Upright Vacuum
     ## 2                                   Acco Suede Grain Vinyl Round Ring Binder
     ## 3                         Avery Durable Slant Ring Binders With Label Holder
     ## 4                                              Avery Round Ring Poly Binders
     ## 5                                                          Acco 3-Hole Punch
-    ##   Sales Quantity Discount Profit Shipping_Cost Order_Priority Low_Priority
+    ##   sales quantity discount profit shipping_cost order_priority low_priority
     ## 1  0.44        1      0.8  -1.11          1.01         Medium        FALSE
     ## 2  0.56        1      0.8  -0.95          1.08         Medium        FALSE
     ## 3  0.84        1      0.8  -1.34          1.06         Medium        FALSE
     ## 4  0.85        1      0.7  -0.60          1.10           High        FALSE
     ## 5  0.88        1      0.8  -1.40          1.09           High        FALSE
-    ##   High_Shipping days_to_ship
+    ##   high_shipping days_to_ship
     ## 1         FALSE       4 days
     ## 2         FALSE       0 days
     ## 3         FALSE       4 days
@@ -894,8 +898,8 @@ Check your code
 # Only purchases made in the US with discounts (we created this object before)
 discountedUSPurchases |> 
    summarise( # call the summarise() function. It is helpful to break the parameters into different lines to see the new columns you are creating
-        meanSales = mean(Sales),    #average sale price 
-        meanDiscount = mean(Discount) # and average discount
+        meanSales = mean(sales),    #average sale price 
+        meanDiscount = mean(discount) # and average discount
               )
 ```
 
@@ -939,10 +943,10 @@ each.
 - You will use the `discountedUSPurchases` data frame to create this
   *new* data frame.
 - Name the new data frame `USCityProfits`.
-- You will use `group_by()` with `City`, where each row will be a city.
+- You will use `group_by()` with `city`, where each row will be a city.
 - You will use `summarise()` function to get the summary statistics for
   each city.
-- The statistic you will be summarizing is the total `Profit` values on
+- The statistic you will be summarizing is the total `profit` values on
   purchases made in the US where the items have been discounted.
 
 {::options parse_block_html='true' /}
@@ -957,27 +961,27 @@ Check your code
 # Only purchases made in the US with discounts
 USCityProfits <- discountedUSPurchases |> 
   # group by city purchase was made in
-  group_by(City) |> 
+  group_by(city) |> 
   # summarise total profit for each city by summing the profit
-  summarise(totalProfit = sum(Profit)) 
+  summarise(total_profit = sum(profit)) 
 
 # Now view your results
 USCityProfits
 ```
 
     ## # A tibble: 348 × 2
-    ##    City        totalProfit
-    ##    <chr>             <dbl>
-    ##  1 Abilene           -3.76
-    ##  2 Akron           -187.  
-    ##  3 Albuquerque       96.2 
-    ##  4 Allen            -39.9 
-    ##  5 Allentown       -226.  
-    ##  6 Altoona           -1.19
-    ##  7 Amarillo        -388.  
-    ##  8 Anaheim          448.  
-    ##  9 Ann Arbor          5.23
-    ## 10 Apopka            54.4 
+    ##    city        total_profit
+    ##    <chr>              <dbl>
+    ##  1 Abilene            -3.76
+    ##  2 Akron            -187.  
+    ##  3 Albuquerque        96.2 
+    ##  4 Allen             -39.9 
+    ##  5 Allentown        -226.  
+    ##  6 Altoona            -1.19
+    ##  7 Amarillo         -388.  
+    ##  8 Anaheim           448.  
+    ##  9 Ann Arbor           5.23
+    ## 10 Apopka             54.4 
     ## # ℹ 338 more rows
 
 *Note:* You might have noticed that the resulting data frame is
@@ -1014,7 +1018,7 @@ Check your code
 
 ``` r
 USCityProfits <- USCityProfits |>
-  arrange(totalProfit)
+  arrange(total_profit)
 ```
 
 </details>
@@ -1040,13 +1044,13 @@ USCityProfits |>
 ```
 
     ## # A tibble: 5 × 2
-    ##   City         totalProfit
-    ##   <chr>              <dbl>
-    ## 1 Philadelphia     -13838.
-    ## 2 Houston          -10153.
-    ## 3 San Antonio       -7299.
-    ## 4 Lancaster         -7243.
-    ## 5 Chicago           -6655.
+    ##   city         total_profit
+    ##   <chr>               <dbl>
+    ## 1 Philadelphia      -13838.
+    ## 2 Houston           -10153.
+    ## 3 San Antonio        -7299.
+    ## 4 Lancaster          -7243.
+    ## 5 Chicago            -6655.
 
 </details>
 
@@ -1071,13 +1075,13 @@ USCityProfits |>
 ```
 
     ## # A tibble: 5 × 2
-    ##   City          totalProfit
-    ##   <chr>               <dbl>
-    ## 1 San Diego           2895.
-    ## 2 San Francisco       7067.
-    ## 3 Seattle             7452.
-    ## 4 Los Angeles        12697.
-    ## 5 New York City      16994.
+    ##   city          total_profit
+    ##   <chr>                <dbl>
+    ## 1 San Diego            2895.
+    ## 2 San Francisco        7067.
+    ## 3 Seattle              7452.
+    ## 4 Los Angeles         12697.
+    ## 5 New York City       16994.
 
 </details>
 

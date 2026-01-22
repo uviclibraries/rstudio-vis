@@ -10,10 +10,6 @@ output:
     preserve_yaml: TRUE # keep Jekyll front-matter
 ---
 
-<!-- TO-DOS -->
-<!-- add use of assertr to validate your data -->
-
-
 ```{r setup, include=FALSE}
 # This code block is to the benefit of anyone working with the .Rmd file to edit the workshop material, rather than participating in the workshop. Hence, it should always be setup to include = FALSE, so it does not appear in the knitted .md file 
 
@@ -633,13 +629,325 @@ endCodeDetailsBlock()
 
 </div>
 
-As you can see, the `clean_names()` function fixed all the column names to a standardized format keeping all lower case and "_". If you want to know more about other helpful function from the `janitor` package, you can check [this link](https://sfirke.github.io/janitor/articles/janitor.html)
+As you can see, the `clean_names()` function fixed all the column names to a standardized format keeping all lower case and using "_" instead of dots or spaces. If you want to know more about other helpful data cleaning functions from the `janitor` package, you can check [this link](https://sfirke.github.io/janitor/articles/janitor.html)
 
 ### 5.2 Correcting variable types
 
+Another common data cleaning practice is to correct variable types. For example, if you remember from using the `str()` function, we can see that in our `purchaseData` dataset, we have some columns that are currently understood as character columns but are actually dates (`order_date` and `ship_date`), as well as some ordered categorical variables that are currently understood as plain character (`order_priority`).
+
+```{r}
+# Check current variable types again
+str(purchaseData)
+```
+
+To change these variable to the correct type, we can overwrite the columns using functions to convert between data types. These usually start with `as.` and then continue with the type you want to convert to.
+
+For example, to convert variables to date, you can use `as.Date()`. In the function, you have to specify the format of the date, for example, the format "YYYY-MM-DD" would be specified as "%Y-%m-%d"
+
+```{r}
+# Convert variables to date type (remember that the $ sign capture a column from a data frame)
+purchaseData$order_date <- as.Date(purchaseData$order_date, format = "%Y-%m-%d")
+purchaseData$ship_date <- as.Date(purchaseData$ship_date, format = "%Y-%m-%d")
+
+# Check results
+str(purchaseData)
+```
+
+See how the variables are now understood as "Date" type. This will be helpful if you want to plot these variables later. For more complex commands using dates, you could also explore the [lubridate](https://lubridate.tidyverse.org/) package, which has more advances functions for dealing wiht dates.
+
+**Note**: in the next activity, you will learn how to use the `mutate()` function from the `tidyverse` package to create or overwrite variables. For now, we are using base R, but you could also perform this data cleaning step using the `mutate()` function, as we will see later.
+
+div class="task-box" markdown="1">
+
+⭐ <u>Task 1-12/u>
+
+**Transform columns to ordered factor**
+
+Now, the missing data type transformation is to transform `order_priority` into an ordered factor. Use the function `factor()` to transform the variable.
+
+*Note:* the two main arguments of the `factor()` function is the vector to be transformed and `levels`. For the `levels` argument, you should specify the order of categories for the variable. You can use the `unique()` function to see the possible values of the variable, and then use these values as a concatenate vector using `c()` to specify the `levels` of the factor.
+
+```{r echo = F, results='asis'}
+startCodeDetailsBlock(summaryText = "Check your code")
+```
+
+```{r}
+## Check unique values of the variable
+unique(purchaseData$order_priority)
+
+## Turn variable into ordered factor, with categories order from low to critical
+purchaseData$order_priority <- factor(purchaseData$order_priority, 
+                                      levels = c("Low", "Medium", "High", "Critical"))
+
+## See results
+str(purchaseData)
+```
+```{r echo = F, results='asis'}
+endCodeDetailsBlock()
+```
+
+</div>
+
+You can see now how the `order_priority` variable has numbers instead of characters, with each number indicating to which categor the observation belongs to.
+</div>
+
 ### 5.3 Validating your data
 
-CONTENT TO BE ADDED USING assertr PACKAGES
+The final step in checking and cleaning your data is making sure everything is how it should be before you start your analysis. The package `assertr` contains helpful functions to allow you to check that your data is how it should be.
+
+The two main functions in `assertr` are `verify()` and `assert()`. 
+
+Let's start with `verify()`. This function takes as arguments a data frame (usually provided through a pipe) and a boolean (i.e. logical) expression. It evaluates the expression and give you a warning if the expression is FALSE. If the expression is TRUE, is simply returns that dataframe that was provided.
+
+For example, let's imagine we have a typo in the `sales` variable, where the third entry was accidenttaly given a negative value:
+
+```{r}
+# Creates an error in the data
+purchaseData$sales[3] <- -purchaseData$sales[3]
+
+# See resulting dataframe
+purchaseData |>
+  head(5)
+```
+This sort of error is usually not easily detected, as it does not prevent calculations such as means or standard deviations to be calculated, although their values are incorrect:
+```{r}
+# This is returning an average smaller than the correct one, because one value was assigned a negative value
+mean(purchaseData$sales)
+```
+Therefore, before you start your analysis, you want to make sure that all values in your variables are what tehys hould be. For the `sales` variable, you want to check that they are positive:
+
+```{r, error = TRUE}
+# takes the cataset purchaseData
+purchaseData |>
+  # verifies that sales is a value larger than 0 (i.e. positive)
+  verify(sales > 0) |>
+  # previews the data set
+  head(5)
+```
+
+Because there is a value smaller than 0, `verify()` gives you an error message, telling you that the third value (i.e. the index) does not fulfill the expression given.
+
+Now you can check teh value, correct it, and check again:
+```{r}
+# View value
+purchaseData$sales[3]
+
+# Correct value
+purchaseData$sales[3] <- - purchaseData$sales[3]
+
+# Check again with verify
+# takes the dataset purchaseData
+purchaseData |>
+  # verifies that sales is a value larger than 0 (i.e. positive)
+  verify(sales > 0) |>
+  # previews the data set
+  head(5)
+```
+
+As you can see, the function now printed the dataset, which means no error was found, and your data has passed the condition given.
+
+div class="task-box" markdown="1">
+
+⭐ <u>Task 1-13/u>
+
+**Check that `quantity` is a positive integer**
+
+Now, check that the `quantity` variable is a integer, positive number.
+
+_Hint:_ the `is.integer()` function checks whether a vector is made of integers
+_Hint 2:_ you can add multiple `verify()` functions, one following the other, connected using `|>
+
+```{r echo = F, results='asis'}
+startCodeDetailsBlock(summaryText = "Check your code")
+```
+
+```{r}
+# takes the dataset purchaseData
+purchaseData |>
+  # verifies that quantity is a value larger than 0 (i.e. positive)
+  verify(quantity > 0) |>
+   # verifies that quantity is integer
+  verify(is.integer(quantity)) |>
+  # previews the data set
+  head(5)
+```
+
+```{r echo = F, results='asis'}
+endCodeDetailsBlock()
+```
+
+</div>
+
+Because the code returned the dataset and no error message, you know that this variable is correct.
+
+While `verify()` takes a logical expression, the `assert()` function takes in (in addition to the dataset) a predicate function and a column to apply the function to. 
+
+
+For example, is it very helpful to check if your categorical values are within a specified set of values through the use of the `in_set()` predicate function. Let's check if the `ship_mode` column has only correct values (one of "First Class", "Second Class", "Same Day", and "Standard Class")
+
+```{r}
+# Get the dataset
+purchaseData |>
+  # Check whether the ship_mode column contain the correct values with the use of the in_set predicate function. Note that the column selected is specified outside the predictae function.
+  assert(in_set("First Class", "Second Class", "Same Day", "Standard Class"), ship_mode) |>
+  # previews the data set
+  head(5)
+```
+
+Becaus there was no error message, we know that there are no errors in this column.
+
+div class="task-box" markdown="1">
+
+⭐ <u>Task 1-14/u>
+
+**Check that `row_id` contains unique value**
+
+Another useful predicate function is `is_uniq()`, which checks if the specified column contains only unique values.
+
+Use `is_uniq` to check if the the variable `row_id` contains only unique values, as it should.
+
+_Hint:_ remember that the selected columns should be specified inside the `assert` function, but outside the predicate function.
+
+```{r echo = F, results='asis'}
+startCodeDetailsBlock(summaryText = "Check your code")
+```
+
+```{r}
+# takes the dataset purchaseData
+purchaseData |>
+  # verifies that row_iw contains only unique values
+  assert(is_uniq, row_id) |>
+  # previews the data set
+  head(5)
+```
+
+```{r echo = F, results='asis'}
+endCodeDetailsBlock()
+```
+
+</div>
+
+As you can see, the column is correct.
+
+Finally, when using the `assertr` package, you do not need to check each column separately. You can validate your data by checking all columns at once in a single chain of data validation using `chain_start()` and `chain_end()`. This will ensure `assertr` checks all of your assertions and returns all instances where the expressions are false:
+
+```{r}
+# takes the dataset purchaseData
+purchaseData |>
+  # start chain of data validation
+  chain_start() |>
+  # verifies that sales is a value larger than 0 (i.e. positive)
+  verify(sales > 0) |>
+  # verifies that quantity is a value larger than 0 (i.e. positive)
+  verify(quantity > 0) |>
+   # verifies that quantity is integer
+  verify(is.integer(quantity)) |>
+  # Check whether the ship_mode column contain the correct values 
+  assert(in_set("First Class", "Second Class", "Same Day", "Standard Class"), ship_mode) |>
+  # verifies that row_iw contains only unique values
+  assert(is_uniq, row_id) |>
+  # Ends chain of data validation
+  chain_end() |>
+  # previews the data set
+  head(5)
+  
+```
+
+For more on the assert package, check their very-helpful [documentation page](https://docs.ropensci.org/assertr/articles/assertr.html).
+
+div class="task-box" markdown="1">
+
+⭐ <u>Optional challenge/u>
+
+**Write data validation code for the entire purchaseData dataset**
+
+Use the `verify()` and `assert()` functions to write data validation code that checks:
+- `row_id` contains unique values
+- `order_id` is a character vector
+- `order_date` and `ship_date` are date vectors
+- `ship_mode` contains values within a set of correct values
+- `customer_id` and `customer_name` are a character vectors
+- `segment` is one of "Consumer", "Corporate", or "Home Office"
+- `postal code` is a numeric vector
+- `market` is one of "USCA", "Asia Pacific", "Europe", "Africa", and "LATAM"
+- `product_id`, `sub_category`, and `product_name` are a character vector
+- `sales` is a positive number
+- `quantity` is a positive integer
+- `discount` is a number between 0 and 1
+- `profit` is a numeric vector
+- `shipping_cost` is a positive number
+- `order_priority`has levels "Low", "Medium", "High", and "Critical"
+
+```{r echo = F, results='asis'}
+startCodeDetailsBlock(summaryText = "Check your code")
+```
+
+```{r}
+# takes the dataset purchaseData
+purchaseData |>
+  # start chain of data validation
+  chain_start() |>
+  # verifies that row_id contains only unique values
+  assert(is_uniq, row_id) |>
+  # verifies that order_id is a character vector
+  verify(is.character(order_id)) |>
+    # verifies that order_date is a Date vector (here is an alternative way to do it using the assert function. Both this way, and the way above for character work the same)
+  assert(is.Date, order_date) |>
+    # verifies that ship_date is a Date vector
+  assert(is.Date, ship_date) |>
+  # Check whether the ship_mode column contains the correct values
+  assert(in_set("First Class", "Second Class", "Same Day", "Standard Class"), ship_mode) |>
+  # verifies that customer_id is a character vector
+  assert(is.character, customer_id) |>
+  # verifies that customer_name is a character vector
+  assert(is.character, customer_name) |>
+  # verifies that segment contains the correct values
+  assert(in_set("Consumer", "Corporate", "Home Office"), segment) |>
+  # verifies that postal_code is a numeric vector
+  assert(is.numeric, postal_code) |>
+  # verifies that market contains the correct values
+  assert(in_set("USCA", "Asia Pacific", "Europe", "Africa", "LATAM"), market) |>
+  # verifies that product_id is a character vector
+  assert(is.character, product_id) |>
+  # verifies that sub_category is a character vector
+  assert(is.character, sub_category) |>
+  # verifies that product_name is a character vector
+  assert(is.character, product_name) |>
+  # verifies that sales is numeric
+  assert(is.numeric, sales) |>
+  # verifies that sales is a value larger than 0 (i.e. positive)
+  verify(sales > 0) |>
+  # verifies that quantity is a value larger than 0 (i.e. positive)
+  verify(quantity > 0) |>
+  # verifies that quantity is integer-valued (even if stored as numeric)
+  verify(is.integer(quantity)) |>
+  # verifies that discount is numeric
+  assert(is.numeric, discount) |>
+  # verifies that discount is between 0 and 1
+  verify(discount >= 0 & discount <= 1) |>
+  # verifies that profit is a numeric vector
+  assert(is.numeric, profit) |>
+  # verifies that shipping_cost is numeric
+  assert(is.numeric, shipping_cost) |>
+  # verifies that shipping_cost is a value larger than 0 (i.e. positive)
+  verify(shipping_cost > 0) |>
+  # verifies that order_priority contains the correct values
+  assert(in_set("Low", "Medium", "High", "Critical"), order_priority) |>
+  # Ends chain of data validation
+  chain_end() |>
+  # previews the data set
+  head(5)
+
+
+```
+```{r echo = F, results='asis'}
+endCodeDetailsBlock()
+```
+
+</div>
+
+
+📍 Reminder! Save your work
 
 
 <script>  

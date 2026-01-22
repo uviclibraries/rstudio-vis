@@ -41,8 +41,8 @@ endCodeDetailsBlock <- function() {
 
 # Data manipulation
 
-  - [1. Selecting specific columns](#1-selecting-specific-columns)
-  - [2. Select specific rows based on a condition](#2-select-specific-rows-based-on-a-condition)
+  - [1. Selecting specific columns with `select()`](#1-selecting-specific-columns-with-select)
+  - [2. Select specific rows `filter()`](#2-select-specific-rows-with-filter)
   - [3. Modify a data frame with `mutate()`](3-modify-a-data-frame-with-mutate)
   - [4. Sorting data with `arrange()`](#4-sorting-data-with-arrange)
   - [5. Summarizing variables with `summarise()`](#5-summarizing-variables-with-summarise)
@@ -62,11 +62,11 @@ div.html-widget {
 <img src="images/tidyverse-logo.png" alt="tidyverse logo" style="float:right;width:180px;"/>
 
 ```{r echo = FALSE}
-# Load data
-purchaseData <- read.csv("docs/Global_Superstore_Orders_2016.csv")
+# Load data from rpevious acivity
+purchaseData <- read.csv("docs/purchase_data_cleaned.csv")
 ```
 
-After making sure your data is cleaned, you will want to inspect your data in more detail, and look for specific trends or associations in our data. Part of that will involve manipulating you data to see specific subsets or summaries of important variables, and part of that will involve making plots and charts to check for trends. We will explore data manipulation in this activity, and data visualization in the next activity.
+After making sure your data is cleaned and validated, you will want to inspect your data in more detail, and look for specific trends or associations in our data. Part of that will involve manipulating you data to see specific subsets or summaries of important variables, and part of that will involve making plots and charts to check for trends. We will explore data manipulation in this activity, and data visualization in the next activity. We will use the cleaned dataset that we finished your previous activity, so you can continue writing in the same script.
 
 In the remainder of this activity, we will use piping to filter our dataset `productData` based on different conditions, such as:
   - Previewing only the column names that begin with `Product`
@@ -97,7 +97,7 @@ statements.
 *Note:* The following activities were drawn from Kaggle’s [Manipulating Data with
 the Tidyverse](https://www.kaggle.com/code/rtatman/manipulating-data-with-the-tidyverse/notebook){:target=“\_blank”}.
 
-## 1. Selecting specific columns
+## 1. Selecting specific columns with `select()`
 
 The commands in this section will not create new objects as we won’t be using them later on.
 
@@ -130,7 +130,7 @@ startCodeDetailsBlock(summaryText = "Check your code")
 ```{r}
 #data set |> select the column titled `Row ID` and view the first 5 items.
 purchaseData |>
-  select(Row_ID) |>
+  select(row_id) |>
   head(5)
 ```
 
@@ -164,7 +164,7 @@ startCodeDetailsBlock(summaryText = "Check your code")
 
 ```{r}
 purchaseData |>
-  select(-Postal_Code) |>
+  select(-postal_code) |>
   head(5)
 ```
 
@@ -203,7 +203,7 @@ In our data set, multiple column names begin with “Product”. We want to see 
 
 **Get a set of columns from a data frame**
 
-Select all the columns from our cleaned purchase data that start with “Product”.
+Select all the columns from our cleaned purchase data that start with “product”.
 
 Write the one-line command to achieve this with piping and the `starts_with()` function
 
@@ -212,9 +212,9 @@ startCodeDetailsBlock(summaryText = "Check your code")
 ```
 
 ```{r}
-# Selects all columns (and their values) from purchaseData whose names begin with "Product"
+# Selects all columns (and their values) from purchaseData whose names begin with "product"
 purchaseData |>
-  select(starts_with("Product")) |>
+  select(starts_with("product")) |>
   head(5) # again, remember that this is just for easier visibility, you don't need to have the head() function to select columns
 ```
 
@@ -223,7 +223,7 @@ endCodeDetailsBlock()
 ```
 </div>
 
-## 2. Select specific rows based on a condition
+## 2. Select specific rows with `filter()`
 
 We may also want to handle certain items (rows) in our data set based on certain criteria.
 
@@ -242,7 +242,7 @@ For example, imagine you only want to analyse data of purchase orders from a cer
 ```{r}
 # Create a new data frame only with data from Canada
 purchaseData_CA <- purchaseData |> 
-  filter(Country == "Canada")
+  filter(country == "Canada")
 
 # Preview new data frame
 head(purchaseData_CA)
@@ -255,7 +255,7 @@ head(purchaseData_CA)
 
 **Filter conditionally**
 
-Filter all the rows from your purchase data where `Quantity` is greater than 10.
+Filter all the rows from your purchase data where `quantity` is greater than 10.
 
 You do not need to save this in a new data frame, but use the `head(5)` function to reduce number of rows to be viewed.
 
@@ -265,7 +265,7 @@ startCodeDetailsBlock(summaryText = "Check your code")
 
 ```{r}
 purchaseData |>
-  filter(Quantity > 10) |>
+  filter(quantity > 10) |>
   head(5) # again, this is just for easier viewing now, but without this, you would see ALL rows that have Quantity greater than 10
 ```
 
@@ -283,7 +283,7 @@ endCodeDetailsBlock()
 
 **Filter conditionally**
 
-Filter all the rows from your purchase data where `City` is “Sydney”.
+Filter all the rows from your purchase data where `city` is “Sydney”.
 
 ```{r echo = F, results='asis'}
 startCodeDetailsBlock(summaryText = "Check your code")
@@ -291,7 +291,7 @@ startCodeDetailsBlock(summaryText = "Check your code")
 
 ```{r}
 purchaseData |>
-  filter(City == "Sydney") |>
+  filter(city == "Sydney") |>
   head(5) # again, this is just for easier viewing now, but without this, you would see ALL rows that have Sidney listed as City
 ```
 
@@ -309,7 +309,7 @@ endCodeDetailsBlock()
 
 **Create a data frame**
 
-Create a new data frame with all the rows from purchaseData where `Country` is “United States” and `Discount` is greater than 0.
+Create a new data frame with all the rows from purchaseData where `country` is “United States” and `discount` is greater than 0.
 
 - Name this data frame: `discountedUSPurchases`
 
@@ -323,7 +323,7 @@ startCodeDetailsBlock(summaryText = "Check your code")
 ```{r}
 # Create the dataframe
 discountedUSPurchases <- purchaseData |>
-                          filter(Country == "United States" & Discount > 0)
+                          filter(country == "United States" & discount > 0)
 
 # View your data frame
 discountedUSPurchases |>
@@ -378,7 +378,7 @@ Identify the existing name of the object you want to mutate
       new variable
   - Say we want to add a column that has a TRUE/FALSE variable (aka
     boolean) for whether the order priority is low.
-    - The expression will be `Order_Priority == "Low"`
+    - The expression will be `order_priority == "Low"`
       - `==` means “the left value is equal to the right value”
         - The result will be a vector with TRUE or FALSE, with TRUE for every
           row in the data is “Low” in the "Order_Priority" column, and FALSE
@@ -387,7 +387,7 @@ Identify the existing name of the object you want to mutate
 ```{r}
 purchaseData <- purchaseData |>
   # Create new column that identifies when priority is low
-  mutate(Low_Priority = (Order_Priority == "Low"))
+  mutate(low_priority = (order_priority == "Low"))
 
 # view first 3 rows of your data frame
 purchaseData |>
@@ -406,8 +406,8 @@ Now try it yourself. Add a new boolean (TRUE/FALSE) variable (column) to
 the purchase data that identifies whether a purchase’s shipping cost is
 greater than 100 dollars.
 
-- Name the new column: `High_Shipping`
-- The value will be TRUE if the `Shipping_Cost` value is over (`>`) 100.
+- Name the new column: `high_shipping`
+- The value will be TRUE if the `shipping_cost` value is over (`>`) 100.
 
 ```{r echo = F, results='asis'}
 startCodeDetailsBlock(summaryText = "Check your code")
@@ -415,7 +415,7 @@ startCodeDetailsBlock(summaryText = "Check your code")
 
 ```{r}
 purchaseData <- purchaseData |>
-  mutate(High_Shipping = (Shipping_Cost > 100))
+  mutate(high_shipping = (shipping_cost > 100))
 
 #view your data frame
 purchaseData |>
@@ -431,7 +431,7 @@ endCodeDetailsBlock()
 </div>
 
 The `mutate()` function also allows you to change the data type for each variable by substituting with a new variable or to create a new variable based on calculations between two variables. For example, let's imagine you wanted to know how long it takes to ship a product after it is ordered to see if the process can be streamlined or improved. To do that, you would need to:
-- Transform your data variables into a date data type (a specific type of data that allows for calculating differences between dates);
+- Transform your data variables into a date data type (which allows for calculating differences between dates). You did this is in the previous acitivy, but now you are seeing how to do this using the mutate function)
 - Calculate the difference in days between the two date variables (`Order_date` and `Ship_date`) and save it in a new variable.
 
 Here's how you can do that using the `mutate()` function
@@ -441,10 +441,10 @@ purchaseData <- purchaseData |> # Get the purchaseData object
   mutate( # identify that you want to mutate variables
     # Different variables that are being mutated inside the mutate function
     # should be separated by comma
-    Order_Date = as.Date(Order_Date), # create a variable that is the same as the Order_Date
-    # variable but transformed to date type, and overwrite Order_Date with that new variable
-    Ship_Date = as.Date(Ship_Date), # repeat for the Ship_Date variable
-    days_to_ship = Ship_Date - Order_Date # calculate the difference in days between both dates variables
+    order_date = as.Date(order_date), # create a variable that is the same as the order_date
+    # variable but transformed to date type, and overwrite order_date with that new variable
+    ship_date = as.Date(ship_date), # repeat for the Ship_Date variable
+    days_to_ship = ship_date - order_date # calculate the difference in days between both dates variables
   )
 
 # View the dataset
@@ -477,7 +477,7 @@ startCodeDetailsBlock(summaryText = "Check your code")
 ```{r}
 # Sort the purchaseData darafrae by the price of sales
 purchaseData <- purchaseData |>
-  arrange(Sales)
+  arrange(sales)
 
 # View your data frame
 purchaseData |>
@@ -519,8 +519,8 @@ startCodeDetailsBlock(summaryText = "Check your code")
 # Only purchases made in the US with discounts (we created this object before)
 discountedUSPurchases |> 
    summarise( # call the summarise() function. It is helpful to break the parameters into different lines to see the new columns you are creating
-        meanSales = mean(Sales),    #average sale price 
-        meanDiscount = mean(Discount) # and average discount
+        meanSales = mean(sales),    #average sale price 
+        meanDiscount = mean(discount) # and average discount
               )
 
 #To retrieve this data later, assign this command to a new object.
@@ -557,9 +557,9 @@ Create a data frame of US Cities and the profit on discounted values for each.
 
 - You will use the `discountedUSPurchases` data frame to create this *new* data frame.
 - Name the new data frame `USCityProfits`.
-- You will use `group_by()` with `City`, where each row will be a city.
+- You will use `group_by()` with `city`, where each row will be a city.
 - You will use `summarise()` function to get the summary statistics for   each city.
-- The statistic you will be summarizing is the total `Profit` values on purchases made in the US where the items have been discounted.
+- The statistic you will be summarizing is the total `profit` values on purchases made in the US where the items have been discounted.
 
 ```{r echo = F, results='asis'}
 startCodeDetailsBlock(summaryText = "Check your code")
@@ -569,9 +569,9 @@ startCodeDetailsBlock(summaryText = "Check your code")
 # Only purchases made in the US with discounts
 USCityProfits <- discountedUSPurchases |> 
   # group by city purchase was made in
-  group_by(City) |> 
+  group_by(city) |> 
   # summarise total profit for each city by summing the profit
-  summarise(totalProfit = sum(Profit)) 
+  summarise(total_profit = sum(profit)) 
 
 # Now view your results
 USCityProfits
@@ -599,7 +599,7 @@ startCodeDetailsBlock(summaryText = "Check your code")
 
 ```{r}
 USCityProfits <- USCityProfits |>
-  arrange(totalProfit)
+  arrange(total_profit)
 ```
 
 ```{r echo = F, results='asis'}
