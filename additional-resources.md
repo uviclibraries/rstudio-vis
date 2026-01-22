@@ -7,6 +7,12 @@ nav_order: 10
 
 ## Data manipulation and visualization resources
 
+- [Introduction to `ggplot2`](https://ggplot2.tidyverse.org/articles/ggplot2.html)
+- [`assert` tutorial](https://docs.ropensci.org/assertr/articles/assertr.html)
+- [`dplyr` tutorial](https://dplyr.tidyverse.org/articles/dplyr.html)
+- [Data manipulation with `tidyverse`](https://informatics.fas.harvard.edu/workshops/intro-r/R-workshop-Part2/)
+- [R for Data Science](https://r4ds.hadley.nz/)
+
 
 ## Acknowledgements
 
