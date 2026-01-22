@@ -11,8 +11,7 @@ output:
 ---
 
 <!-- TO-DOS -->
-<!-- add use of str() function to check data. Actually, add all the cleaning part from the data visualization page from intro to R workshop -->
-<!-- add use of assertR to validate your data -->
+<!-- add use of assertr to validate your data -->
 
 
 ```{r setup, include=FALSE}
@@ -30,6 +29,7 @@ knitr::opts_chunk$set(echo = TRUE)
 #Have the following uncommented any time you knit this Rmd file.
 library(tidyverse)
 library(assertr)
+library(janitor)
 
 # Function that will generate the .md text that creates the toggle button to show answers for activities. To use this function, you should use it inside an code chunk set with echo = FALSE (meaning, do not show) and results = "asis", meaning print the results not in a output chunk. Check the document below for an example
 startCodeDetailsBlock <- function(summaryText = "Check Your Code") {
@@ -57,6 +57,9 @@ endCodeDetailsBlock <- function() {
   - [4.1 Before piping](#41-before-piping)
   - [4.2 Piping](#42-piping)
 - [5. Cleaning and validating data](#5-cleaning-and-validating-data)
+  - [5.1 Fixing column names](#51-fixing-column-names)
+  - [5.2 Correcting variable types](#52-correcting-variable-types)
+  - [5.3 Validating your data](#53-validating-your-data)
   
 <style type="text/css">
 div.html-widget {
@@ -77,17 +80,16 @@ Remember, if you or your group have any questions or get stuck as you work throu
 
 ## 1. Getting ready: installing packages
 
-One of the most fascinating things about R is that it has an active community developing a lot of packages everyday, which makes R powerful. A package is a compilation of functions (data sets, code, documentations
-and tests) external to R that provide it with additional capabilities.
+One of the most fascinating things about R is that it has an active community developing a lot of packages everyday, which makes R very powerful. A package is a compilation of functions (data sets, code, documentations and tests) external to R that provide it with additional capabilities.
 
 We can install packages in the console using the `install.packages()` function. You should use the console and **not** the code editor to run this code because you only need to install the package once.
 
 <div class="task-box" markdown="1">
 &#11088; [Task 1-1]{.underline} 
 
-**Install the tidyverse and assert packages in the Console window.**
+**Install the `tidyverse`, `janitor`, and `assert` packages in the Console window.**
 
-Package names: tidyverse and assertr. 
+Package names: `tidyverse`, `janitor`, and `assertr`. 
 
 Do not worry about what they do now, we will go through these packages throughout this workshop. Now, we just want to make sure they are properly installed and loaded.
 
@@ -97,6 +99,7 @@ startCodeDetailsBlock(summaryText = "Check your code")
 
 ```{r, eval = FALSE}
 install.packages("tidyverse") # Install the tidyverse package
+install.packages("janitor") # Install the janitor package
 install.packages("assertr") # Install the assertr package
 ```
 
@@ -118,7 +121,9 @@ To check if the package is installed, enter the following in the console
 # Paste both lines into the console, and then run. 
 installed <- installed.packages() # this creates an object with names of installed packages
 "tidyverse" %in% rownames(installed) # this looks for tidyverse in that object
-"assertr" %in% rownames(installed) # this looks for tidyverse in that object
+"janitor" %in% rownames(installed) # this looks for janitor in that object
+"assertr" %in% rownames(installed) # this looks for assertr in that object
+
 ```
 **Load the libraries.**
 
@@ -151,9 +156,8 @@ startCodeDetailsBlock(summaryText = "Check your code")
 ```{r}
 # Load the packages
 library(tidyverse) 
+library(janitor)
 library(assertr)
-#then, as always, send the command to the console by
-# clicking Ctrl + Enter (Windows) or Cmd +  Enter (Mac)
 ```
 
 ```{r echo = F, results='asis'}
@@ -316,6 +320,30 @@ endCodeDetailsBlock()
 
 You can use the `dim()` function to check if the correct number of rows and columns has been imported. In this case, the table imported has 51290 observations (i.e., rows) for 24 variables (i.e., columns). If you know the size of your dataset, you can check if everything was imported here.
 
+Another way to inspect your data is to use the `str()` function.
+
+<div class="task-box" markdown="1">
+
+⭐ <u>Task 1-6</u>
+
+**See the structure of your data.**
+
+```{r echo = F, results='asis'}
+startCodeDetailsBlock(summaryText = "Check your code")
+```
+
+```{r}
+# Check data
+str(purchaseData)
+```
+```{r echo = F, results='asis'}
+endCodeDetailsBlock()
+```
+
+</div>
+
+With this, you can also see the dimensions of the dataset, but the result also shows you the names of the variables and the type of each variable.
+
 At this point, you have gone through the four major steps that are recommended at the start of your script to set the stage for your analysis:
   - Load any packages
   - Set working directory
@@ -328,6 +356,8 @@ This is how your script should look so far:
 
 ## load packages
 library(tidyverse)
+library(assertr)
+library(janitor)
 
 ## Set working directory
 setwd("path-to-folder") # the path will be different for each person
@@ -338,11 +368,14 @@ purchaseData <- read.csv("Global_Superstore_Orders_2016.csv")
 ## check data
 head(purchaseData, 5)
 dim(purchaseData)
+str(purchaseData)
 ```
+
+When doings these steps, you can identify certain elements of your dataset that you might want to clean before starting with data visualization and analysis. In the above example, you can see that variable names do not have a standardized format such as all lower caps, or using only "." or "_" instead of spaces. This is one the steps we will perform in the cleaning stage, so keep in this mind. But before that, let's talk about piping, which will help us for data cleaning and data manipulation.
 
 📍 Reminder! Save your work
 
-## 4. Introducing Ppping
+## 4. Introducing Piping
 
 Before we start with how to clean (this activity), manipulate and visualize our data (next activities), we want to introduce you to the `|>` symbol, which is very powerful to use in conjunction with the `tidyverse` package to easily manipulate and visualize data.
 
@@ -356,7 +389,7 @@ This symbol is known as a “pipe”, and it’s used for feeding the result of 
  
 This might be difficult to understand now, and that's why we will, in the next two sections, first try manipulating a data frame without using pipe, and then do the same using pipe, so that you understand the difference and the power of using pipe.
 
-In pipes, you can choose to have a newline (shift+enter) after the `|>` symbol or leave it all on one line. For a cleaner code, we recommend adding a new line.
+In pipes, you can choose to have a newline after the `|>` symbol or leave it all on one line. For a cleaner code, we recommend adding a new line.
 
 ### 4.1 Manipulating dataframes without piping
 
@@ -383,7 +416,7 @@ To get our list of column names sorted alphabetically, we first need to get the 
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-6</u>
+⭐ <u>Task 1-7</u>
 
 **Create an object**
 
@@ -411,7 +444,7 @@ Then, after we have the list of column names, we can sort the vector into ascend
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-7</u>
+⭐ <u>Task 1-8</u>
 
 **Create an object**
 
@@ -438,7 +471,7 @@ endCodeDetailsBlock()
 
 **Second option: nesting**
 
-In Tasks 1-6 and 1-7, we ran two commands, resulting in two separate objects containing the column names:
+In Tasks 1-7 and 1-8, we ran two commands, resulting in two separate objects containing the column names:
 
 - `purchaseDataColumnNames`: Ordered as they would be if the file were opened in Excel
 - `alphaPurchaseDataColumnNames`: Ordered alphabetically (sorted)
@@ -452,7 +485,7 @@ However, we only care about the list of alphabetically-sorted column names.
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-8</u>
+⭐ <u>Task 1-9</u>
 
 **Create an object through nested functions**
 
@@ -510,7 +543,7 @@ startingObject |>
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-9</u>
+⭐ <u>Task 1-10/u>
 
 **Create an object through piping**
 
@@ -566,7 +599,47 @@ If you want to know more about pipe, and how it is more intuitive than other way
 
 ## 5. Cleaning and validating data
 
-CONTENT TO BE ADDED. USING janitor AND assertr PACKAGES
+Ok, now that we now how to use the pipe, let's talk about basic function to clean and validate your date.
+
+### 5.1 Fixing column names
+
+We often import data with column names that are not standardized, or contain special characters that might break if kept in column names. This is where the `janitor` package can help. It contains a function called `clean_names()`, which automatically standardize column names formatting. The `clean_names()` function requires only one parameter: the dataframe name, and can be used with the pipe operator.
+
+<div class="task-box" markdown="1">
+
+⭐ <u>Task 1-11/u>
+
+**Standardize column names**
+
+Use the `clean_names()` function to automatically standardize column names formatting. 
+
+*Hint:* Remember to overwrite `purchaseData` with the object with the new column names, otherwise R will not save the new column names.
+
+```{r echo = F, results='asis'}
+startCodeDetailsBlock(summaryText = "Check your code")
+```
+
+```{r}
+## standardize column names
+purchaseData <- purchaseData |>
+  clean_names()
+
+## view column names after standardization
+names(purchaseData)
+```
+```{r echo = F, results='asis'}
+endCodeDetailsBlock()
+```
+
+</div>
+
+As you can see, the `clean_names()` function fixed all the column names to a standardized format keeping all lower case and "_". If you want to know more about other helpful function from the `janitor` package, you can check [this link](https://sfirke.github.io/janitor/articles/janitor.html)
+
+### 5.2 Correcting variable types
+
+### 5.3 Validating your data
+
+CONTENT TO BE ADDED USING assertr PACKAGES
 
 
 <script>  

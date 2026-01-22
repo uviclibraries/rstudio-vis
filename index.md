@@ -26,7 +26,7 @@ nav_order: 1
 At the end of this workshop, you will be able to:
 
 1. Execute the main steps of importing, checking, and cleaning your data
-2. Manipulate and clean data with the _Tidyverse_ and _janitor_ packages
+2. Manipulate and clean data with the _tidyverse_ and _janitor_ packages
 3. Check and validate your data using the _assertr_ package
 4. Create basic charts and plots (scatter, bar and line plots) with the _ggplot2_ package
  
