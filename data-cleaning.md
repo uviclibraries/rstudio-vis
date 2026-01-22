@@ -106,7 +106,7 @@ the last line of your console.
 To check if the package is installed, enter the following in the console
 
 ``` r
-# Paste both lines into the console, and then run. 
+# Paste these lines into the console, and then run. 
 installed <- installed.packages() # this creates an object with names of installed packages
 "tidyverse" %in% rownames(installed) # this looks for tidyverse in that object
 ## [1] TRUE
@@ -155,24 +155,12 @@ an unquoted name that it interprets as a package name.
   package only needs to be *installed* once, but it needs to be *loaded*
   any time you are running your script.
 
-{::options parse_block_html='true' /}
-<details>
-
-<summary>
-
-Check your code
-</summary>
-
 ``` r
 # Load the packages
 library(tidyverse) 
 library(janitor)
 library(assertr)
 ```
-
-</details>
-
-{::options parse_block_html='false'/}
 
 ## 2. Getting data
 
@@ -242,7 +230,7 @@ about the orders.
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-3</u>
+⭐ <u>Task 1-4</u>
 
 **Load data**
 
@@ -293,7 +281,7 @@ the console, the results will wrap, as seen in the output of Task 1-4.
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-4</u>
+⭐ <u>Task 1-5</u>
 
 **Look at the first 5 rows of our purchase data.**
 
@@ -343,7 +331,7 @@ function. This function takes only one parameter, the data set name.
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-5</u>
+⭐ <u>Task 1-6</u>
 
 **Find out the dimensions of the data set**, i.e., number of rows and
 columns.
@@ -379,7 +367,7 @@ Another way to inspect your data is to use the `str()` function.
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-6</u>
+⭐ <u>Task 1-7</u>
 
 **See the structure of your data.**
 
@@ -434,8 +422,12 @@ variable.
 
 At this point, you have gone through the four major steps that are
 recommended at the start of your script to set the stage for your
-analysis: - Load any packages - Set working directory - Load data -
-Inspect and check if data was correctly imported.
+analysis:
+
+- Load any packages
+- Set working directory
+- Load data
+- Inspect and check if data was correctly imported.
 
 This is how your script should look so far:
 
@@ -535,7 +527,7 @@ get the column names.
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-7</u>
+⭐ <u>Task 1-8</u>
 
 **Create an object**
 
@@ -570,7 +562,7 @@ the `sort()` function.
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-8</u>
+⭐ <u>Task 1-9</u>
 
 **Create an object**
 
@@ -620,7 +612,7 @@ function. - e.g., `function1(function2(parameter))`
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-9</u>
+⭐ <u>Task 1-10</u>
 
 **Create an object through nested functions**
 
@@ -693,7 +685,7 @@ startingObject |>
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-10/u\>
+⭐ <u>Task 1-11</u>
 
 **Create an object through piping**
 
@@ -782,7 +774,7 @@ the dataframe name, and can be used with the pipe operator.
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-11/u\>
+⭐ <u>Task 1-12</u>
 
 **Standardize column names**
 
@@ -826,7 +818,7 @@ As you can see, the `clean_names()` function fixed all the column names
 to a standardized format keeping all lower case and using “\_” instead
 of dots or spaces. If you want to know more about other helpful data
 cleaning functions from the `janitor` package, you can check [this
-link](https://sfirke.github.io/janitor/articles/janitor.html)
+link](https://sfirke.github.io/janitor/articles/janitor.html).
 
 ### 5.2 Correcting variable types
 
@@ -878,7 +870,7 @@ the function, you have to specify the format of the date, for example,
 the format “YYYY-MM-DD” would be specified as “%Y-%m-%d”
 
 ``` r
-# Convert variables to date type (remember that the $ sign capture a column from a data frame)
+# Convert variables to date type (remember that the $ sign captures a column from a data frame)
 purchaseData$order_date <- as.Date(purchaseData$order_date, format = "%Y-%m-%d")
 purchaseData$ship_date <- as.Date(purchaseData$ship_date, format = "%Y-%m-%d")
 
@@ -916,22 +908,22 @@ See how the variables are now understood as “Date” type. This will be
 helpful if you want to plot these variables later. For more complex
 commands using dates, you could also explore the
 [lubridate](https://lubridate.tidyverse.org/) package, which has more
-advances functions for dealing wiht dates.
+advances functions for dealing with dates.
 
 **Note**: in the next activity, you will learn how to use the `mutate()`
 function from the `tidyverse` package to create or overwrite variables.
 For now, we are using base R, but you could also perform this data
 cleaning step using the `mutate()` function, as we will see later.
 
-div class=“task-box” markdown=“1”\>
+<div class="task-box" markdown="1">
 
-⭐ <u>Task 1-12/u\>
+⭐ <u>Task 1-13</u>
 
 **Transform columns to ordered factor**
 
-Now, the missing data type transformation is to transform
-`order_priority` into an ordered factor. Use the function `factor()` to
-transform the variable.
+Now, the final data type transformation is to transform `order_priority`
+into an ordered factor. Use the function `factor()` to transform the
+variable.
 
 *Note:* the two main arguments of the `factor()` function is the vector
 to be transformed and `levels`. For the `levels` argument, you should
@@ -997,9 +989,8 @@ str(purchaseData)
 </div>
 
 You can see now how the `order_priority` variable has numbers instead of
-characters, with each number indicating to which categor the observation
-belongs to.
-</div>
+characters, with each number indicating to which category the
+observation belongs to.
 
 ### 5.3 Validating your data
 
@@ -1008,7 +999,7 @@ everything is how it should be before you start your analysis. The
 package `assertr` contains helpful functions to allow you to check that
 your data is how it should be.
 
-The two main functions in `assertr` are `verify()` and `assert()`.
+The two main functions in are `verify()` and `assert()`.
 
 Let’s start with `verify()`. This function takes as arguments a data
 frame (usually provided through a pipe) and a boolean (i.e. logical)
@@ -1071,8 +1062,9 @@ mean(purchaseData$sales)
     ## [1] 246.2889
 
 Therefore, before you start your analysis, you want to make sure that
-all values in your variables are what tehys hould be. For the `sales`
-variable, you want to check that they are positive:
+all values in your variables are what they hould be. This is called
+**data validation**. For example, for the `sales` variable, you want to
+check that they are positive:
 
 ``` r
 # takes the cataset purchaseData
@@ -1094,7 +1086,7 @@ Because there is a value smaller than 0, `verify()` gives you an error
 message, telling you that the third value (i.e. the index) does not
 fulfill the expression given.
 
-Now you can check teh value, correct it, and check again:
+Now you can check the value, correct it, and check again:
 
 ``` r
 # View value
@@ -1150,17 +1142,19 @@ purchaseData |>
 As you can see, the function now printed the dataset, which means no
 error was found, and your data has passed the condition given.
 
-div class=“task-box” markdown=“1”\>
+<div class="task-box" markdown="1">
 
-⭐ <u>Task 1-13/u\>
+⭐ <u>Task 1-14/u\>
 
 **Check that `quantity` is a positive integer**
 
 Now, check that the `quantity` variable is a integer, positive number.
 
 *Hint:* the `is.integer()` function checks whether a vector is made of
-integers *Hint 2:* you can add multiple `verify()` functions, one
-following the other, connected using \`\|\>
+integers
+
+*Hint 2:* you can add multiple `verify()` functions, one following the
+other, connected using \`\|\>
 
 {::options parse_block_html='true' /}
 <details>
@@ -1234,7 +1228,8 @@ correct values (one of “First Class”, “Second Class”, “Same Day”, an
 ``` r
 # Get the dataset
 purchaseData |>
-  # Check whether the ship_mode column contain the correct values with the use of the in_set predicate function. Note that the column selected is specified outside the predictae function.
+  # Check whether the ship_mode column contain the correct values with the use of the in_set predicate function. 
+  # Note that the column selected is specified outside the predicate function.
   assert(in_set("First Class", "Second Class", "Same Day", "Standard Class"), ship_mode) |>
   # previews the data set
   head(5)
@@ -1271,17 +1266,17 @@ purchaseData |>
     ## 4        5      0.1  -96.54        910.16         Medium
     ## 5        8      0.0  311.52        903.04       Critical
 
-Becaus there was no error message, we know that there are no errors in
+Because there was no error message, we know that there are no errors in
 this column.
-
-div class=“task-box” markdown=“1”\>
-
-⭐ <u>Task 1-14/u\>
-
-**Check that `row_id` contains unique value**
 
 Another useful predicate function is `is_uniq()`, which checks if the
 specified column contains only unique values.
+
+<div class="task-box" markdown="1">
+
+⭐ <u>Task 1-15/u\>
+
+**Check that `row_id` contains unique value**
 
 Use `is_uniq` to check if the the variable `row_id` contains only unique
 values, as it should.
@@ -1343,7 +1338,7 @@ purchaseData |>
 
 </div>
 
-As you can see, the column is correct.
+With no wrroe message, we know that the column is correct.
 
 Finally, when using the `assertr` package, you do not need to check each
 column separately. You can validate your data by checking all columns at
@@ -1406,24 +1401,32 @@ purchaseData |>
 For more on the assert package, check their very-helpful [documentation
 page](https://docs.ropensci.org/assertr/articles/assertr.html).
 
-div class=“task-box” markdown=“1”\>
+<div class="task-box" markdown="1">
 
 ⭐ <u>Optional challenge/u\>
 
 **Write data validation code for the entire purchaseData dataset**
 
 Use the `verify()` and `assert()` functions to write data validation
-code that checks: - `row_id` contains unique values - `order_id` is a
-character vector - `order_date` and `ship_date` are date vectors -
-`ship_mode` contains values within a set of correct values -
-`customer_id` and `customer_name` are a character vectors - `segment` is
-one of “Consumer”, “Corporate”, or “Home Office” - `postal code` is a
-numeric vector - `market` is one of “USCA”, “Asia Pacific”, “Europe”,
-“Africa”, and “LATAM” - `product_id`, `sub_category`, and `product_name`
-are a character vector - `sales` is a positive number - `quantity` is a
-positive integer - `discount` is a number between 0 and 1 - `profit` is
-a numeric vector - `shipping_cost` is a positive number -
-`order_priority`has levels “Low”, “Medium”, “High”, and “Critical”
+code that checks:
+
+- `row_id` contains unique values
+- `order_id` is a character vector
+- `order_date` and `ship_date` are date vectors
+- `ship_mode` contains values within a set of correct values
+- `customer_id` and `customer_name` are a character vectors
+- `segment` is one of “Consumer”, “Corporate”, or “Home Office”
+- `postal code` is a numeric vector
+- `market` is one of “USCA”, “Asia Pacific”, “Europe”, “Africa”, and
+  “LATAM”
+- `product_id`, `sub_category`, and `product_name` are a character
+  vector
+- `sales` is a positive number
+- `quantity` is a positive integer
+- `discount` is a number between 0 and 1
+- `profit` is a numeric vector
+- `shipping_cost` is a positive number
+- `order_priority`has levels “Low”, “Medium”, “High”, and “Critical”
 
 {::options parse_block_html='true' /}
 <details>

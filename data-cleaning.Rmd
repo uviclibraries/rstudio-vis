@@ -114,7 +114,7 @@ endCodeDetailsBlock()
 To check if the package is installed, enter the following in the console
 
 ```{r, collapse = TRUE}
-# Paste both lines into the console, and then run. 
+# Paste these lines into the console, and then run. 
 installed <- installed.packages() # this creates an object with names of installed packages
 "tidyverse" %in% rownames(installed) # this looks for tidyverse in that object
 "janitor" %in% rownames(installed) # this looks for janitor in that object
@@ -145,19 +145,11 @@ endCodeDetailsBlock()
   package only needs to be *installed* once, but it needs to be *loaded*
   any time you are running your script.
 
-```{r echo = F, results='asis'}
-startCodeDetailsBlock(summaryText = "Check your code")
-```
-
 ```{r}
 # Load the packages
 library(tidyverse) 
 library(janitor)
 library(assertr)
-```
-
-```{r echo = F, results='asis'}
-endCodeDetailsBlock()
 ```
 
 ## 2. Getting data
@@ -212,7 +204,7 @@ After loading the package and setting your working directory, you should be read
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-3</u>
+⭐ <u>Task 1-4</u>
 
 **Load data**
 
@@ -256,7 +248,7 @@ We can preview the data set using the `head()` function. This will display the f
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-4</u>
+⭐ <u>Task 1-5</u>
 
 **Look at the first 5 rows of our purchase data.**
 
@@ -296,7 +288,7 @@ We can find out the dimensions (rows and columns) using the `dim()` function. Th
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-5</u>
+⭐ <u>Task 1-6</u>
 
 **Find out the dimensions of the data set**, i.e., number of rows and columns.
 
@@ -320,7 +312,7 @@ Another way to inspect your data is to use the `str()` function.
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-6</u>
+⭐ <u>Task 1-7</u>
 
 **See the structure of your data.**
 
@@ -341,10 +333,11 @@ endCodeDetailsBlock()
 With this, you can also see the dimensions of the dataset, but the result also shows you the names of the variables and the type of each variable.
 
 At this point, you have gone through the four major steps that are recommended at the start of your script to set the stage for your analysis:
-  - Load any packages
-  - Set working directory
-  - Load data
-  - Inspect and check if data was correctly imported.
+
+- Load any packages
+- Set working directory
+- Load data
+- Inspect and check if data was correctly imported.
 
 This is how your script should look so far:
 ```{r, eval = FALSE}
@@ -412,7 +405,7 @@ To get our list of column names sorted alphabetically, we first need to get the 
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-7</u>
+⭐ <u>Task 1-8</u>
 
 **Create an object**
 
@@ -440,7 +433,7 @@ Then, after we have the list of column names, we can sort the vector into ascend
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-8</u>
+⭐ <u>Task 1-9</u>
 
 **Create an object**
 
@@ -481,7 +474,7 @@ However, we only care about the list of alphabetically-sorted column names.
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-9</u>
+⭐ <u>Task 1-10</u>
 
 **Create an object through nested functions**
 
@@ -539,7 +532,7 @@ startingObject |>
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-10/u>
+⭐ <u>Task 1-11</u>
 
 **Create an object through piping**
 
@@ -603,7 +596,7 @@ We often import data with column names that are not standardized, or contain spe
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-11/u>
+⭐ <u>Task 1-12</u>
 
 **Standardize column names**
 
@@ -629,7 +622,7 @@ endCodeDetailsBlock()
 
 </div>
 
-As you can see, the `clean_names()` function fixed all the column names to a standardized format keeping all lower case and using "_" instead of dots or spaces. If you want to know more about other helpful data cleaning functions from the `janitor` package, you can check [this link](https://sfirke.github.io/janitor/articles/janitor.html)
+As you can see, the `clean_names()` function fixed all the column names to a standardized format keeping all lower case and using "_" instead of dots or spaces. If you want to know more about other helpful data cleaning functions from the `janitor` package, you can check [this link](https://sfirke.github.io/janitor/articles/janitor.html).
 
 ### 5.2 Correcting variable types
 
@@ -645,7 +638,7 @@ To change these variable to the correct type, we can overwrite the columns using
 For example, to convert variables to date, you can use `as.Date()`. In the function, you have to specify the format of the date, for example, the format "YYYY-MM-DD" would be specified as "%Y-%m-%d"
 
 ```{r}
-# Convert variables to date type (remember that the $ sign capture a column from a data frame)
+# Convert variables to date type (remember that the $ sign captures a column from a data frame)
 purchaseData$order_date <- as.Date(purchaseData$order_date, format = "%Y-%m-%d")
 purchaseData$ship_date <- as.Date(purchaseData$ship_date, format = "%Y-%m-%d")
 
@@ -653,17 +646,17 @@ purchaseData$ship_date <- as.Date(purchaseData$ship_date, format = "%Y-%m-%d")
 str(purchaseData)
 ```
 
-See how the variables are now understood as "Date" type. This will be helpful if you want to plot these variables later. For more complex commands using dates, you could also explore the [lubridate](https://lubridate.tidyverse.org/) package, which has more advances functions for dealing wiht dates.
+See how the variables are now understood as "Date" type. This will be helpful if you want to plot these variables later. For more complex commands using dates, you could also explore the [lubridate](https://lubridate.tidyverse.org/) package, which has more advances functions for dealing with dates.
 
 **Note**: in the next activity, you will learn how to use the `mutate()` function from the `tidyverse` package to create or overwrite variables. For now, we are using base R, but you could also perform this data cleaning step using the `mutate()` function, as we will see later.
 
-div class="task-box" markdown="1">
+<div class="task-box" markdown="1">
 
-⭐ <u>Task 1-12/u>
+⭐ <u>Task 1-13</u>
 
 **Transform columns to ordered factor**
 
-Now, the missing data type transformation is to transform `order_priority` into an ordered factor. Use the function `factor()` to transform the variable.
+Now, the final data type transformation is to transform `order_priority` into an ordered factor. Use the function `factor()` to transform the variable.
 
 *Note:* the two main arguments of the `factor()` function is the vector to be transformed and `levels`. For the `levels` argument, you should specify the order of categories for the variable. You can use the `unique()` function to see the possible values of the variable, and then use these values as a concatenate vector using `c()` to specify the `levels` of the factor.
 
@@ -688,14 +681,13 @@ endCodeDetailsBlock()
 
 </div>
 
-You can see now how the `order_priority` variable has numbers instead of characters, with each number indicating to which categor the observation belongs to.
-</div>
+You can see now how the `order_priority` variable has numbers instead of characters, with each number indicating to which category the observation belongs to.
 
 ### 5.3 Validating your data
 
 The final step in checking and cleaning your data is making sure everything is how it should be before you start your analysis. The package `assertr` contains helpful functions to allow you to check that your data is how it should be.
 
-The two main functions in `assertr` are `verify()` and `assert()`. 
+The two main functions in are `verify()` and `assert()`. 
 
 Let's start with `verify()`. This function takes as arguments a data frame (usually provided through a pipe) and a boolean (i.e. logical) expression. It evaluates the expression and give you a warning if the expression is FALSE. If the expression is TRUE, is simply returns that dataframe that was provided.
 
@@ -714,7 +706,7 @@ This sort of error is usually not easily detected, as it does not prevent calcul
 # This is returning an average smaller than the correct one, because one value was assigned a negative value
 mean(purchaseData$sales)
 ```
-Therefore, before you start your analysis, you want to make sure that all values in your variables are what tehys hould be. For the `sales` variable, you want to check that they are positive:
+Therefore, before you start your analysis, you want to make sure that all values in your variables are what they hould be. This is called **data validation**. For example, for the `sales` variable, you want to check that they are positive:
 
 ```{r, error = TRUE}
 # takes the cataset purchaseData
@@ -727,7 +719,7 @@ purchaseData |>
 
 Because there is a value smaller than 0, `verify()` gives you an error message, telling you that the third value (i.e. the index) does not fulfill the expression given.
 
-Now you can check teh value, correct it, and check again:
+Now you can check the value, correct it, and check again:
 ```{r}
 # View value
 purchaseData$sales[3]
@@ -746,15 +738,16 @@ purchaseData |>
 
 As you can see, the function now printed the dataset, which means no error was found, and your data has passed the condition given.
 
-div class="task-box" markdown="1">
+<div class="task-box" markdown="1">
 
-⭐ <u>Task 1-13/u>
+⭐ <u>Task 1-14/u>
 
 **Check that `quantity` is a positive integer**
 
 Now, check that the `quantity` variable is a integer, positive number.
 
 _Hint:_ the `is.integer()` function checks whether a vector is made of integers
+
 _Hint 2:_ you can add multiple `verify()` functions, one following the other, connected using `|>
 
 ```{r echo = F, results='asis'}
@@ -788,21 +781,22 @@ For example, is it very helpful to check if your categorical values are within a
 ```{r}
 # Get the dataset
 purchaseData |>
-  # Check whether the ship_mode column contain the correct values with the use of the in_set predicate function. Note that the column selected is specified outside the predictae function.
+  # Check whether the ship_mode column contain the correct values with the use of the in_set predicate function. 
+  # Note that the column selected is specified outside the predicate function.
   assert(in_set("First Class", "Second Class", "Same Day", "Standard Class"), ship_mode) |>
   # previews the data set
   head(5)
 ```
 
-Becaus there was no error message, we know that there are no errors in this column.
-
-div class="task-box" markdown="1">
-
-⭐ <u>Task 1-14/u>
-
-**Check that `row_id` contains unique value**
+Because there was no error message, we know that there are no errors in this column.
 
 Another useful predicate function is `is_uniq()`, which checks if the specified column contains only unique values.
+
+<div class="task-box" markdown="1">
+
+⭐ <u>Task 1-15/u>
+
+**Check that `row_id` contains unique value**
 
 Use `is_uniq` to check if the the variable `row_id` contains only unique values, as it should.
 
@@ -827,7 +821,7 @@ endCodeDetailsBlock()
 
 </div>
 
-As you can see, the column is correct.
+With no wrroe message, we know that the column is correct.
 
 Finally, when using the `assertr` package, you do not need to check each column separately. You can validate your data by checking all columns at once in a single chain of data validation using `chain_start()` and `chain_end()`. This will ensure `assertr` checks all of your assertions and returns all instances where the expressions are false:
 
@@ -855,13 +849,14 @@ purchaseData |>
 
 For more on the assert package, check their very-helpful [documentation page](https://docs.ropensci.org/assertr/articles/assertr.html).
 
-div class="task-box" markdown="1">
+<div class="task-box" markdown="1">
 
 ⭐ <u>Optional challenge/u>
 
 **Write data validation code for the entire purchaseData dataset**
 
 Use the `verify()` and `assert()` functions to write data validation code that checks:
+
 - `row_id` contains unique values
 - `order_id` is a character vector
 - `order_date` and `ship_date` are date vectors
