@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 2 - Data visualiation
+title: 3 - Data visualiation
 nav_order: 4
 parent: Workshop Activities
 customjs: http://code.jquery.com/jquery-1.4.2.min.js
@@ -10,17 +10,21 @@ output:
     preserve_yaml: TRUE # keep Jekyll front-matter
 ---
 
+# Data visualization
+
 - [1. Getting Ready](#1-getting-ready)
   - [1.1 Prepare your working
     environment](#11-prepare-your-working-environment)
   - [1.2 Load your data](#12-load-your-data)
   - [1.3 Check your data](#13-check-your-data)
   - [1.4 Clean your data](#14-clean-your-data)
-- [2. Creating Plots and Charts in
+- [2. Creating plots and charts in
   ggplot2](#2-creating-plots-and-charts-in-ggplot2)
-  - [2.1. Scatter Plots](#21-scatter-plots)
-  - [2.2. Bar Charts](#22-bar-charts)
-  - [2.3. Line Charts](#23-line-charts)
+  - [2.1. Histograms](#21-histograms)
+  - [2.2. Boxplots](#22-boxplots)
+  - [2.3. Scatter Plots](#23-scatter-plots)
+  - [2.4. Bar Charts](#24-bar-charts)
+  - [2.5. Line Charts](#25-line-charts)
 
 If you and your group have any questions or get stuck as you work
 through this in-class exercise, please ask the instructor for
@@ -247,7 +251,15 @@ charts: `geom_line()` - histogram: `geom_histogram()` - boxplots:
 Plots will appear in the “Plot” tab (probably in the bottom right hand
 quadrant of your workspace).
 
-### 2.1. Scatter Plots
+### 2.1 Histograms
+
+ADD CONTENT
+
+### 2.2 Boxplots
+
+ADD content
+
+### 2.3. Scatter Plots
 
 Let’s apply the ggplot command above to create a scatter plot.
 
@@ -416,7 +428,7 @@ ggplot(data = chocolateData, aes(x = cocoa_percent, y = rating)) +
 
 ------------------------------------------------------------------------
 
-### 2.2. Bar Charts
+### 2.4. Bar Charts
 
 A bar chart shows the relationship between a categorical variable (on
 the *x-axis*) and a numerical variable (on the *y-axis*).
@@ -676,7 +688,7 @@ ggplot(chocolateData_commonBeans_rating, aes(x = bean_type, y = mean_rating)) +
 
 </div>
 
-### 2.3. Line Charts
+### 2.5. Line Charts
 
 To create a line chart, let’s start first by creating a new variable
 that we might want to plot in a line chart. In this case, let’s assume
