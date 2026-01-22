@@ -137,6 +137,8 @@ purchaseData |>
 *Hint:* Begin with the name of the data set, followed by your select
 function passing in the column name as the parameter.
 
+</div>
+
 To select all of the columns from our data set that do *not* start with
 specific text, we do the inverse,
 
@@ -201,6 +203,8 @@ purchaseData |>
 </details>
 
 {::options parse_block_html='false'/}
+
+</div>
 
 ❗ We can also select a *subset* of columns
 
@@ -267,6 +271,8 @@ purchaseData |>
 </details>
 
 {::options parse_block_html='false'/}
+
+</div>
 
 ## 2. Select specific rows based on a condition
 
@@ -538,6 +544,8 @@ discountedUSPurchases |>
 *Hint:* `&` is used for “and”, in cases where you want to manage
 multiple cases like filtering my two variables<br> - e.g., values of the
 `Country` and `Discount` columns.
+
+</div>
 
 ------------------------------------------------------------------------
 
@@ -844,9 +852,8 @@ purchaseData |>
 
 </details>
 
-{::options parse_block_html='false'/}
-
-*Hint:* Do not wrap the column name in quotations.
+{::options parse_block_html='false'/} *Hint:* Do not wrap the column
+name in quotations.
 
 </div>
 
@@ -1113,11 +1120,3 @@ details {
 
 [NEXT STEP: Data Visualization](data-vizualization.html){: .btn
 .btn-blue }
-
-</div>
-
-</div>
-
-</div>
-
-</div>

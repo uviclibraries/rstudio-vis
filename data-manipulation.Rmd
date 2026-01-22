@@ -141,6 +141,8 @@ endCodeDetailsBlock()
 *Hint:* Begin with the name of the data set, followed by your select
 function passing in the column name as the parameter.
 
+</div>
+
 To select all of the columns from our data set that do *not* start with specific text, we do the inverse,
 
 - Again using the `select()` function
@@ -169,6 +171,7 @@ purchaseData |>
 ```{r echo = F, results='asis'}
 endCodeDetailsBlock()
 ```
+</div>
 
 ❗ We can also select a *subset* of columns
 
@@ -218,6 +221,7 @@ purchaseData |>
 ```{r echo = F, results='asis'}
 endCodeDetailsBlock()
 ```
+</div>
 
 ## 2. Select specific rows based on a condition
 
@@ -332,6 +336,8 @@ endCodeDetailsBlock()
 
 *Hint:* `&` is used for “and”, in cases where you want to manage multiple cases like filtering my two variables<br> - e.g., values of the `Country` and `Discount`
 columns.
+
+</div>
 
 ------------------------------------------------------------------------
 
@@ -481,7 +487,6 @@ purchaseData |>
 ```{r echo = F, results='asis'}
 endCodeDetailsBlock()
 ```
-
 *Hint:* Do not wrap the column name in quotations.
 
 </div>
