@@ -1144,7 +1144,7 @@ error was found, and your data has passed the condition given.
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-14/u\>
+⭐ <u>Task 1-14</u>
 
 **Check that `quantity` is a positive integer**
 
@@ -1274,7 +1274,7 @@ specified column contains only unique values.
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-15/u\>
+⭐ <u>Task 1-15</u>
 
 **Check that `row_id` contains unique value**
 
@@ -1403,7 +1403,7 @@ page](https://docs.ropensci.org/assertr/articles/assertr.html).
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Optional challenge/u\>
+⭐ <u>Optional challenge</u>
 
 **Write data validation code for the entire purchaseData dataset**
 

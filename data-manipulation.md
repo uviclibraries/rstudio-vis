@@ -43,16 +43,18 @@ associations in our data. Part of that will involve manipulating you
 data to see specific subsets or summaries of important variables, and
 part of that will involve making plots and charts to check for trends.
 We will explore data manipulation in this activity, and data
-visualization in the next activity. We will use the cleaned dataset that
-we finished your previous activity, so you can continue writing in the
-same script.
+visualization in the next activity.
+
+**We will use the cleaned dataset that we finished your previous
+activity, so you can continue writing in the same script.**
 
 In the remainder of this activity, we will use piping to filter our
-dataset `productData` based on different conditions, such as: -
-Previewing only the column names that begin with `Product` - Previewing
-only the purchases from Tampa Bay - Previewing only the purchases that
-are corporate orders - Previewing only the purchases from Tampa that
-aren’t critical priority
+dataset `productData` based on different conditions, such as:
+
+- Previewing only the column names that begin with `product`
+- Previewing only the purchases from Tampa Bay
+- Previewing only the purchases that are corporate orders
+- Previewing only the purchases from Tampa that aren’t critical priority
 
 But before we begin to do that, we need to look at operators.
 
@@ -109,7 +111,7 @@ data.frame.
 
 Preview the values in the Row ID column.
 
-- Column name: `Row_ID`
+- Column name: `row_id`
 
 {::options parse_block_html='true' /}
 <details>
@@ -156,7 +158,7 @@ specific text, we do the inverse,
 **Get a set of columns from data frame**
 
 Select all the columns from your purchase data that are *not* the
-“Postal_Code” column.
+“postal_code” column.
 
 {::options parse_block_html='true' /}
 <details>
@@ -213,8 +215,8 @@ purchaseData |>
 
 - e.g., columns whose names begin with a common string of characters.
 
-In our data set, multiple column names begin with “Product”. We want to
-see only the data of columns whose names begin with “Product.” The
+In our data set, multiple column names begin with “product”. We want to
+see only the data of columns whose names begin with “product.” The
 following explains the process.
 
 - Use piping on your purchaseData
@@ -546,7 +548,7 @@ discountedUSPurchases |>
 
 *Hint:* `&` is used for “and”, in cases where you want to manage
 multiple cases like filtering my two variables<br> - e.g., values of the
-`Country` and `Discount` columns.
+`country` and `discount` columns.
 
 </div>
 
@@ -629,10 +631,9 @@ purchaseData |>
     ## 2      0.1 -288.77        923.63       Critical        FALSE
     ## 3      0.1  919.97        915.49         Medium        FALSE
 
-``` r
-# Note how there is a new column at the end called "Low_Priority". It starts with
-# 3 values of FALSE as the first 3 rows were not low priority (see the Order_Priority column)
-```
+Note how there is a new column at the end called “Low_Priority”. It
+starts with 3 values of FALSE as the first 3 rows were not low priority
+(see the `order_priority` column).
 
 <div class="task-box" markdown="1">
 
@@ -714,12 +715,15 @@ variable by substituting with a new variable or to create a new variable
 based on calculations between two variables. For example, let’s imagine
 you wanted to know how long it takes to ship a product after it is
 ordered to see if the process can be streamlined or improved. To do
-that, you would need to: - Transform your data variables into a date
-data type (which allows for calculating differences between dates). You
-did this is in the previous acitivy, but now you are seeing how to do
-this using the mutate function) - Calculate the difference in days
-between the two date variables (`Order_date` and `Ship_date`) and save
-it in a new variable.
+that, you would need to:
+
+- Transform your data variables into a date data type (which allows for
+  calculating differences between dates). You did this is in the
+  previous acitivy, but now you are seeing how you would do this using
+  the mutate function.
+
+- Calculate the difference in days between the two date variables
+  (`Order_date` and `Ship_date`) and save it in a new variable.
 
 Here’s how you can do that using the `mutate()` function
 
@@ -729,7 +733,7 @@ purchaseData <- purchaseData |> # Get the purchaseData object
     # Different variables that are being mutated inside the mutate function
     # should be separated by comma
     order_date = as.Date(order_date), # create a variable that is the same as the order_date
-    # variable but transformed to date type, and overwrite order_date with that new variable
+    # variable but transformed to date type, and overwrite order_date with that new variable.
     ship_date = as.Date(ship_date), # repeat for the Ship_Date variable
     days_to_ship = ship_date - order_date # calculate the difference in days between both dates variables
   )
@@ -797,7 +801,7 @@ vector parameter, not a data frame.
 
 **Sort data frame**
 
-Update `purchaseData` to sort objects by price (column `Sales`).
+Update `purchaseData` to sort objects by price (column `sales`).
 
 {::options parse_block_html='true' /}
 <details>
@@ -906,9 +910,8 @@ discountedUSPurchases |>
     ##   meanSales meanDiscount
     ## 1  232.7353    0.3004407
 
-``` r
-#To retrieve this data later, assign this command to a new object.
-```
+**Note:** To retrieve this data later, assign this command to a new
+object.
 
 </details>
 
@@ -1122,5 +1125,5 @@ details {
 
 <!--https://gist.github.com/rxaviers/7360908-->
 
-[NEXT STEP: Data Visualization](data-vizualization.html){: .btn
+[NEXT STEP: Data Visualization](data-visualization.html){: .btn
 .btn-blue }

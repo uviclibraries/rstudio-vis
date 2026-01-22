@@ -66,13 +66,16 @@ div.html-widget {
 purchaseData <- read.csv("docs/purchase_data_cleaned.csv")
 ```
 
-After making sure your data is cleaned and validated, you will want to inspect your data in more detail, and look for specific trends or associations in our data. Part of that will involve manipulating you data to see specific subsets or summaries of important variables, and part of that will involve making plots and charts to check for trends. We will explore data manipulation in this activity, and data visualization in the next activity. We will use the cleaned dataset that we finished your previous activity, so you can continue writing in the same script.
+After making sure your data is cleaned and validated, you will want to inspect your data in more detail, and look for specific trends or associations in our data. Part of that will involve manipulating you data to see specific subsets or summaries of important variables, and part of that will involve making plots and charts to check for trends. We will explore data manipulation in this activity, and data visualization in the next activity. 
+
+**We will use the cleaned dataset that we finished your previous activity, so you can continue writing in the same script.**
 
 In the remainder of this activity, we will use piping to filter our dataset `productData` based on different conditions, such as:
-  - Previewing only the column names that begin with `Product`
-  - Previewing only the purchases from Tampa Bay
-  - Previewing only the purchases that are corporate orders
-  - Previewing only the purchases from Tampa that aren’t critical priority
+
+- Previewing only the column names that begin with `product`
+- Previewing only the purchases from Tampa Bay
+- Previewing only the purchases that are corporate orders
+- Previewing only the purchases from Tampa that aren’t critical priority
 
 But before we begin to do that, we need to look at operators.
 
@@ -121,7 +124,7 @@ When manipulating your data, you sometimes want to see just some variables. To g
 
 Preview the values in the Row ID column.
 
-- Column name: `Row_ID`
+- Column name: `row_id`
 
 ```{r echo = F, results='asis'}
 startCodeDetailsBlock(summaryText = "Check your code")
@@ -156,7 +159,7 @@ To select all of the columns from our data set that do *not* start with specific
 **Get a set of columns from data frame**
 
 Select all the columns from your purchase data that are *not* the 
-“Postal_Code” column.
+“postal_code” column.
 
 ```{r echo = F, results='asis'}
 startCodeDetailsBlock(summaryText = "Check your code")
@@ -177,7 +180,7 @@ endCodeDetailsBlock()
 
 - e.g., columns whose names begin with a common string of characters.
 
-In our data set, multiple column names begin with “Product”. We want to see only the data of columns whose names begin with “Product.” The following explains the process.
+In our data set, multiple column names begin with “product”. We want to see only the data of columns whose names begin with “product.” The following explains the process.
 
 - Use piping on your purchaseData
 
@@ -334,8 +337,7 @@ discountedUSPurchases |>
 endCodeDetailsBlock()
 ```
 
-*Hint:* `&` is used for “and”, in cases where you want to manage multiple cases like filtering my two variables<br> - e.g., values of the `Country` and `Discount`
-columns.
+*Hint:* `&` is used for “and”, in cases where you want to manage multiple cases like filtering my two variables<br> - e.g., values of the `country` and `discount` columns.
 
 </div>
 
@@ -392,9 +394,9 @@ purchaseData <- purchaseData |>
 # view first 3 rows of your data frame
 purchaseData |>
     head(3)
-# Note how there is a new column at the end called "Low_Priority". It starts with
-# 3 values of FALSE as the first 3 rows were not low priority (see the Order_Priority column)
 ```
+
+Note how there is a new column at the end called "Low_Priority". It starts with 3 values of FALSE as the first 3 rows were not low priority (see the `order_priority` column).
 
 <div class="task-box" markdown="1">
 
@@ -402,9 +404,7 @@ purchaseData |>
 
 **Add a column to your dataframe**
 
-Now try it yourself. Add a new boolean (TRUE/FALSE) variable (column) to
-the purchase data that identifies whether a purchase’s shipping cost is
-greater than 100 dollars.
+Now try it yourself. Add a new boolean (TRUE/FALSE) variable (column) to the purchase data that identifies whether a purchase’s shipping cost is greater than 100 dollars.
 
 - Name the new column: `high_shipping`
 - The value will be TRUE if the `shipping_cost` value is over (`>`) 100.
@@ -431,7 +431,9 @@ endCodeDetailsBlock()
 </div>
 
 The `mutate()` function also allows you to change the data type for each variable by substituting with a new variable or to create a new variable based on calculations between two variables. For example, let's imagine you wanted to know how long it takes to ship a product after it is ordered to see if the process can be streamlined or improved. To do that, you would need to:
-- Transform your data variables into a date data type (which allows for calculating differences between dates). You did this is in the previous acitivy, but now you are seeing how to do this using the mutate function)
+
+- Transform your data variables into a date data type (which allows for calculating differences between dates). You did this is in the previous acitivy, but now you are seeing how you would do this using the mutate function.
+
 - Calculate the difference in days between the two date variables (`Order_date` and `Ship_date`) and save it in a new variable.
 
 Here's how you can do that using the `mutate()` function
@@ -442,7 +444,7 @@ purchaseData <- purchaseData |> # Get the purchaseData object
     # Different variables that are being mutated inside the mutate function
     # should be separated by comma
     order_date = as.Date(order_date), # create a variable that is the same as the order_date
-    # variable but transformed to date type, and overwrite order_date with that new variable
+    # variable but transformed to date type, and overwrite order_date with that new variable.
     ship_date = as.Date(ship_date), # repeat for the Ship_Date variable
     days_to_ship = ship_date - order_date # calculate the difference in days between both dates variables
   )
@@ -468,7 +470,7 @@ The `arrange()` function enables you to order your data frame according to the v
 
 **Sort data frame**
 
-Update `purchaseData` to sort objects by price (column `Sales`).
+Update `purchaseData` to sort objects by price (column `sales`).
 
 ```{r echo = F, results='asis'}
 startCodeDetailsBlock(summaryText = "Check your code")
@@ -522,9 +524,8 @@ discountedUSPurchases |>
         meanSales = mean(sales),    #average sale price 
         meanDiscount = mean(discount) # and average discount
               )
-
-#To retrieve this data later, assign this command to a new object.
 ```
+**Note:** To retrieve this data later, assign this command to a new object.
 
 ```{r echo = F, results='asis'}
 endCodeDetailsBlock()
@@ -675,5 +676,5 @@ details {
   &#10;</style>
 <!--https://gist.github.com/rxaviers/7360908-->
 
-[NEXT STEP: Data Visualization](data-vizualization.html){: .btn
+[NEXT STEP: Data Visualization](data-visualization.html){: .btn
 .btn-blue }

@@ -740,7 +740,7 @@ As you can see, the function now printed the dataset, which means no error was f
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-14/u>
+⭐ <u>Task 1-14</u>
 
 **Check that `quantity` is a positive integer**
 
@@ -794,7 +794,7 @@ Another useful predicate function is `is_uniq()`, which checks if the specified 
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 1-15/u>
+⭐ <u>Task 1-15</u>
 
 **Check that `row_id` contains unique value**
 
@@ -851,7 +851,7 @@ For more on the assert package, check their very-helpful [documentation page](ht
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Optional challenge/u>
+⭐ <u>Optional challenge</u>
 
 **Write data validation code for the entire purchaseData dataset**
 
