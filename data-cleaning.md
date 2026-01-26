@@ -277,7 +277,7 @@ display the first number of rows.
   - number of rows to display
 
 *Note:* In cases where there are more columns that fit horizontally in
-the console, the results will wrap, as seen in the output of Task 1-4.
+the console, the results will wrap, as seen in the output of Task 1-5.
 
 <div class="task-box" markdown="1">
 
@@ -455,7 +455,7 @@ When doings these steps, you can identify certain elements of your
 dataset that you might want to clean before starting with data
 visualization and analysis. In the above example, you can see that
 variable names do not have a standardized format such as all lower caps,
-or using only “.” or “\_” instead of spaces. This is one the steps we
+or using only “.” or “\_” instead of spaces. This is one of the steps we
 will perform in the cleaning stage, so keep in this mind. But before
 that, let’s talk about piping, which will help us for data cleaning and
 data manipulation.
@@ -594,7 +594,7 @@ names from our purchase data in the previous task!
 
 **Second option: nesting**
 
-In Tasks 1-7 and 1-8, we ran two commands, resulting in two separate
+In Tasks 1-8 and 1-9, we ran two commands, resulting in two separate
 objects containing the column names:
 
 - `purchaseDataColumnNames`: Ordered as they would be if the file were
@@ -1154,7 +1154,7 @@ Now, check that the `quantity` variable is a integer, positive number.
 integers
 
 *Hint 2:* you can add multiple `verify()` functions, one following the
-other, connected using \`\|\>
+other, connected using `|>`.
 
 {::options parse_block_html='true' /}
 <details>
@@ -1338,7 +1338,7 @@ purchaseData |>
 
 </div>
 
-With no wrroe message, we know that the column is correct.
+With no error message, we know that the column is correct.
 
 Finally, when using the `assertr` package, you do not need to check each
 column separately. You can validate your data by checking all columns at

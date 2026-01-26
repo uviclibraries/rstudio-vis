@@ -60,6 +60,7 @@ An important part of checking and analyzing data is making figures with your dat
 In this activity, you will make a histogram, a boxplot, a scatter plot, a bar chart, and a line chart.
 
 Before you start this activity, let's give your RStudio session a fresh start. For that:
+
 - Save your previous scripts by clicking on File > Save, or on the save icon on the top left. If needed, choose a folder to save it (probably the working directory you were working on in the previous activity) and give it a meaningful name.
 - Close the script by clicking on File > Close or on the x next to the file name on the top left.
 - Clean your R environment (i.e., remove all the objects) by clicking on the broom icon ![Broom Icon](images/broom.png) on the top right and clicking yes on the pop-up window that appears.
@@ -201,40 +202,232 @@ The command to begin plots and charts are very similar. Let’s first look at th
   - `aes(x = columnForXAxis, y = columnForYAxis)`
 
 The geometry function is attached to the ggplot() function with`+ geom_` and is completed by the type of plot or chart:
+
+- histogram: `geom_histogram()`
+- boxplots: `geom_boxplot()`
 - scatter plot or point plots: `geom_point()`
 - bar charts: `geom_bar()` or `geom_col()`
 - line charts: `geom_line()`
-- histogram: `geom_histogram()`
-- boxplots: `geom_boxplot()`
 
-Plots will appear in the “Plot” tab (probably in the bottom right hand quadrant of your workspace).
+Plots will appear in the “Plot” tab (probably in the bottom right hand quadrant of your RStudio window).
 
 ### 2.1 Histograms
 
-ADD CONTENT
+Histograms are very helpful plots to look at the distribution of your variables. We already learned how to plot them using base R commands in the [Introduction to R](https://uviclibraries.github.io/rstudio/) workshop, and now we will learn how to plot them using the `ggplot2` package.
+
+The function to plot a histogram is `geom_histogram()`. To use this function, you only need to specify one variable, and `ggplot` will automatically count the number of observations in each bin of the variable for you.
+
+For example, to make a histogram of the cocoa percentage in chocolate bars:
+
+```{r, message = FALSE}
+# Create plot by specifying data and assign variable to the x axis
+ggplot(data = chocolateData, aes(x = cocoa_percent)) +
+    geom_histogram() # then add a layer of histogram bars
+```
+As you can see, the `cocoa_percent` variable was assigned to the x-axis, as specified, and the y-axis was automatically assigned to the count of observations in each bin.
+
+When plotting a histogram, you can also specify the width of the bins through the argument `binwidth` or the number of bins to be used through the `bins` argument.
+
+
+⭐ <u>Task 3-5</u>
+
+**Make a histogram of the cocoa percentage of bars.**
+
+- Using chocolate data : `chocolateData`
+- X-axis = cocoa percentage of chocolate bars: `coca_percent`
+- Choose `binwidth = 5` inside the `geaom_histogram()` function to force the bin width to be 5% (it always uses the scale of the x variable)
+
+```{r echo = F, results='asis'}
+startCodeDetailsBlock(summaryText = "Check your code")
+```
+
+```{r}
+# Create plot by specifying data and assign variables to the x axis
+ggplot(data = chocolateData, aes(x = cocoa_percent)) +
+    geom_histogram(binwidth = 5) # then add a layer of histogram bars, with binwidth equals to 5%
+```
+
+```{r echo = F, results='asis'}
+endCodeDetailsBlock()
+```
+
+</div>
+
+⭐ <u>Task 3-6/u>
+
+**Make a histogram of the cocoa percentage of bars.**
+
+- Using chocolate data : `chocolateData`
+- X-axis = cocoa percentage of chocolate bars: `coca_percent`
+- Choose `bins = 15` inside the `geaom_histogram()` function to force the plot to have 15 bins
+
+```{r echo = F, results='asis'}
+startCodeDetailsBlock(summaryText = "Check your code")
+```
+
+```{r}
+# Create plot by specifying data and assign variables to the x axis
+ggplot(data = chocolateData, aes(x = cocoa_percent)) +
+    geom_histogram(bins = 15) # then add a layer of histogram bars, with 15 bins
+```
+
+```{r echo = F, results='asis'}
+endCodeDetailsBlock()
+```
+
+</div>
+
+You can also specify the axes labels and a title for your axis using the `labs()` function:
+
+- `+ labs(title = "", x = "", y = " ")`
+
+```{r}
+# Create plot by specifying data and assign variable to the x axis
+ggplot(data = chocolateData, aes(x = cocoa_percent)) +
+  # then add a layer of histogram bars, with 15 bins
+    geom_histogram(bins = 15) + 
+  # add labels and title tot he plot
+  labs(title = "Histogram of cocoa percentage", 
+       x = "Cocoa percentage (%)",
+       y = "Number of observations")
+  
+```
 
 ### 2.2 Boxplots
 
-ADD content
+Boxplots are another way to see the distribution of your data, by showing key statistical features of your data:
+
+- Median: the line that divides the boxplots shows the median of your data
+- Quartiles: the top and bottom ends of the boxes represent the upper and lower quartiles of your data
+- Range: the lines extending from the boxes shows the range of values, excluding outliers
+- Outliers: dots or other markers beyond the whiskers show potential outliers in your data
+
+If you want to know more about boxplots, check out [this link](https://www.data-to-viz.com/caveat/boxplot.html).
+
+The function to plot a boxplot is `geom_boxplot()`, and in the same way as the histogram, it requires only one variable to be specified (usually the y-axis, but you could also use the x-axis).
+
+For example, to plot the boxplot of the ratings chocolate bars received
+
+```{r}
+# Create plot by specifying data and assign variable to the y axis
+ggplot(data = chocolateData, aes(y = rating)) +
+  # then add a layer of boxplot
+    geom_boxplot() 
+```
+Boxplots can be useful if you want to compare the distribution of a variable between different categories. For example, imagine you want to know if the rating of chocolate bars varies according to the bean type. You can then specify `bean_type` as the second variable (for the x-axis) in the plot.
+
+⭐ <u>Task 3-7/u>
+
+**Make a boxplot of the rating chocolate bars received by bean type**
+
+- Using chocolate data : `chocolateData`
+- X-axis = Bean type: `bean_type`
+- Y-axis = Rating chocolate bars received: `rating`
+- Remember to add descriptive labels and a title to your plot using the `labs()` function
+
+```{r echo = F, results='asis'}
+startCodeDetailsBlock(summaryText = "Check your code")
+```
+
+```{r}
+# Create plot by specifying data and assign variable to the y axis
+ggplot(data = chocolateData, aes(y = rating, x = bean_type )) +
+  # then add a layer of boxplot
+    geom_boxplot() +
+  # add labels
+  labs(title = "Rating by bean type",
+       x = "Bean type",
+       y = "Rating")
+```
+```{r echo = F, results='asis'}
+endCodeDetailsBlock()
+```
+
+</div>
+
+As you can see, some bean types, such as "Trinitario" have more variable ratings, while others, such as "Amazon" have consistently higher ratings.
+
+However, the plot is hard to interpret, as there are many bean types. In this case, it might be best to plot only the most common bean types. For that, we first need to create a new dataset that contains only the most common bean types.
+
+```{r}
+# Get the most common bean types
+bars_per_type <- chocolateData |> # get the dataframe
+  group_by(bean_type) |> # group by bean type
+  count() # count the number of bars per bean_type
+
+# check the new data frame
+bars_per_type
+```
+
+Now, we want to get the list of the most common bean types. Looking at the data above, you could decide to use 10 as a threshold of a sufficient number of bars being produced.
+
+```{r}
+# Get most common bean types
+common_bean_types <- bars_per_type |> # get the data
+  filter(n > 10) |> # filters for rows where the variable n is larger than 10
+  pull(bean_type) # gets the column with bean type names
+# check common bean types
+common_bean_types
+```
+There are four types of beans with more than 10 chocolate bears being produced. Finally, we can then filter the original dataset only for the rows with these bean types.
+
+```{r}
+# Filter chocolateData to only include common beans
+chocolateData_commonBeans <- chocolateData |> # Get the data
+  filter(bean_type %in% common_bean_types) # Filter for rows where the value in
+  # variable bean_type is present in the vector common_bean_types
+```
+
+<div class="task-box" markdown="1">
+
+⭐ <u>Task 3-8</u>
+
+**Make a boxplot of the rating chocolate bars received by most common bean types**
+
+Now remake your boxplot, but only for the most common bean types.
+
+```{r echo = F, results='asis'}
+startCodeDetailsBlock(summaryText = "Check your code")
+```
+
+```{r}
+# Create plot by specifying data and assign variable to the y axis
+ggplot(data = chocolateData_commonBeans, aes(y = rating, x = bean_type )) +
+  # then add a layer of boxplot
+    geom_boxplot() +
+  # add labels
+  labs(title = "Rating by most common bean types",
+       x = "Bean type",
+       y = "Rating")
+```
+```{r echo = F, results='asis'}
+endCodeDetailsBlock()
+```
+
+*Hint:* use the newly created object `chocolateData_commonBeans`.
+
+</div>
+
+As you can see, the ratings of the most common bean types are not that different.
 
 ### 2.3. Scatter Plots
 
-Let’s apply the ggplot command above to create a scatter plot.
+Not let’s apply the ggplot commands to create a scatter plot.
 
-**Definition - Scatter plot:** A plot with two axes, each representing a different variable. Each individual observation is shown using a single point. The position of the point is determined by the value of
-the variables assigned to the x and y axes for that observation.
+**Definition - Scatter plot:** A plot with two axes, each representing a different variable. Each individual observation is shown using a single point. The position of the point is determined by the value of the variables assigned to the x and y axes for that observation.
 
 <img src="images/scatter-example.png" alt="An example scatter plot" style="width:420px;"/>
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 3-5</u>
+⭐ <u>Task 3-9</u>
 
 **Make a scatter plot of the cocoa percentage and the rating a chocolate bar received.**
 
 - Using chocolate data : `chocolateData`
 - X-axis = Cocoa percentage: `cocoa_percent`
 - Y-axis = Rating a chocolate bar received: `rating`
+- Scatter plot function: `+ geom_points()`
 
 ```{r echo = F, results='asis'}
 startCodeDetailsBlock(summaryText = "Check your code")
@@ -252,7 +445,7 @@ endCodeDetailsBlock()
 
 </div>
 
-Before we add details to our plot, we need to learn about the different components. Again, wait until the next task to do anything.
+Before we add details to our plot, we need to learn about the different components. Wait until the next task to do anything.
 
 **Definition - Fitted line:** (aka. a ‘line of best fit’) is a line representing some function of x and y that has the best fit (or the smallest overall error) for the observed data.
 
@@ -278,7 +471,7 @@ endCodeDetailsBlock()
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 3-6</u>
+⭐ <u>Task 3-10</u>
 
 **Make another scatter plot of the cocoa percentage and the rating a chocolate bar received**, with the following:
 
@@ -309,13 +502,15 @@ endCodeDetailsBlock()
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task  3-7</u>
+⭐ <u>Task  3-11</u>
 
 **Add descriptive axis labels and a title to your scatter plot.**
 
-We’re also going to add labels and custom colors using the `labs()` function and custom colors.
+Now also add descriptive labels using the `labs()` function.
 
-- Labels `+ labs(title = "", x = "", y = " ")`
+- Title: "Rating of Chocolate Bar by Cocoa Percentage"
+- X-axis labels: "Chocolate Bar Rating"
+- Y-axis label: "Cocoa Percentage"
 
 ```{r echo = F, results='asis'}
 startCodeDetailsBlock(summaryText = "Check your code")
@@ -358,7 +553,7 @@ For example, let's make a bar chart that shows the number of chocolate bars that
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task  3-8</u>
+⭐ <u>Task  3-12</u>
 
 **Create a basic bar chart.**
 
@@ -386,42 +581,11 @@ endCodeDetailsBlock()
 
 </div>
 
-You can see that the plot is hard to interpret, as there are many bean types that are not commonly made. In this case, it would be best to plot only the most common bean types. For that, we first need to create a new dataset that contains only the most common bean types.
-
-To do that, we need to calculate the number of bars of each type that are being made. We can use the `group_by()` function that you learned in the previous section:
-
-```{r}
-# Get the most common bean types
-bars_per_type <- chocolateData |> # get the dataframe
-  group_by(bean_type) |> # group by bean type
-  count() # count the number of bars per bean_type
-
-# check the new data frame
-bars_per_type
-```
-
-Now, we want to get the list of the most common bean types. Looking at the data above, you could decide to use 10 as a threshold of a sufficient number of bars being produced.
-
-```{r}
-# Get most common bean types
-common_bean_types <- bars_per_type |> # get the data
-  filter(n > 10) |> # filters for rows where the variable n is larger than 10
-  pull(bean_type) # gets the column with bean type names
-# check common bean types
-common_bean_types
-```
-There are four types of beans with more than 10 chocolate bears being produced. Finally, we can then filter the original dataset only for the rows with these bean types.
-
-```{r}
-# Filter chocolateData to only include common beans
-chocolateData_commonBeans <- chocolateData |> # Get the data
-  filter(bean_type %in% common_bean_types) # Filter for rows where the value in
-  # variable bean_type is present in the vector common_bean_types
-```
+Again, here the plot is hard to interpret, as there are many bean types that are not commonly made. In this case, it would be again best to plot only the most common bean types, in the same way we did for the boxplot.
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 3-9</u>
+⭐ <u>Task 3-13</u>
 
 **Create a basic bar chart.**
 
@@ -437,12 +601,9 @@ ggplot(chocolateData_commonBeans, aes(x = bean_type)) +
   # Add a layer of bars
   geom_bar()
 ```
-
 ```{r echo = F, results='asis'}
 endCodeDetailsBlock()
 ```
-
-*Hint:* use the newly created object `chocolateData_commonBeans`.
 
 </div>
 
@@ -450,7 +611,7 @@ Another type of bar chart is the stacked bar chart. A stacked bar chart shows tw
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 3-10</u>
+⭐ <u>Task 3-14</u>
 
 **Create a stacked bar chart.**
 
@@ -495,7 +656,7 @@ Then, you can use this new dataset to plot your bar chart.
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 3-11</u>
+⭐ <u>Task 3-15</u>
 
 **Create a bar chart using `geom_col()`.**
 
@@ -526,7 +687,7 @@ To create a line chart, let's start first by creating a new variable that we mig
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 3-12</u>
+⭐ <u>Task 3-16</u>
 
 **Create an object with the mean chocolate rating by year.**
 
@@ -566,7 +727,7 @@ Now we are ready to make our line chart!
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 3-13</u>
+⭐ <u>Task 3-17</u>
 
 **Create a line chart using the mean chocolate rating by year.**
 
@@ -602,7 +763,7 @@ endCodeDetailsBlock()
 
 <div class="task-box" markdown="1">
 
-⭐ <u>Task 3-14</u>
+⭐ <u>Task 3-18</u>
 
 **Style your line chart.**
 
@@ -639,13 +800,73 @@ endCodeDetailsBlock()
 
 </div>
 
-Congratulations! Now you know how to use ggplot2 to plot scatter plots, bar charts and line charts!
+Congratulations! Now you know how to use ggplot2 to plot histograms, boxplots, scatter plots, bar charts and line charts!
 
 ------------------------------------------------------------------------
 
 📍 Reminder! Save your work
 
 ------------------------------------------------------------------------
+
+<div class="task-box" markdown="1">
+
+⭐ <u>Optional challenge</u>
+
+**Plot the change in rating over time for the 4 most common bean types**
+
+Create a line chart similar to the one above, but instead of just the one line across all chocolates, plot four lines, one for each most common bean type.
+
+Steps:
+
+- Create a dataframe with the mean rating by year for each most common bean type.
+  - Start with the dataset `chocolateData_commonBeans`
+  - Use `group_by()` and `summarize()` just as above, but group by both `review_date` and `bean_type`
+
+- Use the dataframe created to plot the line chart.
+  - Inside the `aes()` function, map the aesthetics `colour` (i.e. the colour of the line) to the `bean_type` variable
+
+```{r echo = F, results='asis'}
+startCodeDetailsBlock(summaryText = "Check your code")
+```
+
+```{r, message = FALSE}
+# Get the dataset of most common bean types
+meanRatingByYearType <- chocolateData_commonBeans |>
+  # Group by review date and bean ty[e]
+  group_by(review_date, bean_type) |>
+  # Get average rating for each review date and bean type
+  summarise(
+    rating = mean(rating)
+    )
+
+# Now see the object created
+meanRatingByYearType |> 
+  head(5)
+
+# Create the plot by specifying the data and the variables assigned to x and y axes, as well as colour
+ggplot(meanRatingByYearType, aes(x = review_date, y = rating, colour = bean_type)) +
+  # Add a layer of lines
+  geom_line() +
+  # Corrects the breakpoints for the x axes
+  scale_x_continuous(
+    breaks = meanRatingByYear$review_date  # Use actual review dates for breaks
+  ) +
+  # Add labels
+  labs(
+    x = "Review Date", 
+    y = "Rating", 
+    colour = "Bean Type",
+    title = "Change in Rating Over Time for Most Common Bean Types"
+  )
+
+```
+
+```{r echo = F, results='asis'}
+endCodeDetailsBlock()
+```
+
+</div>
+
 
 <script>  
 function toggle(input) {
