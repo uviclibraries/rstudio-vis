@@ -228,6 +228,7 @@ As you can see, the `cocoa_percent` variable was assigned to the x-axis, as spec
 
 When plotting a histogram, you can also specify the width of the bins through the argument `binwidth` or the number of bins to be used through the `bins` argument.
 
+<div class="task-box" markdown="1">
 
 ⭐ <u>Task 3-5</u>
 
@@ -253,7 +254,9 @@ endCodeDetailsBlock()
 
 </div>
 
-⭐ <u>Task 3-6/u>
+<div class="task-box" markdown="1">
+
+⭐ <u>Task 3-6</u>
 
 **Make a histogram of the cocoa percentage of bars.**
 
@@ -316,7 +319,9 @@ ggplot(data = chocolateData, aes(y = rating)) +
 ```
 Boxplots can be useful if you want to compare the distribution of a variable between different categories. For example, imagine you want to know if the rating of chocolate bars varies according to the bean type. You can then specify `bean_type` as the second variable (for the x-axis) in the plot.
 
-⭐ <u>Task 3-7/u>
+<div class="task-box" markdown="1">
+
+⭐ <u>Task 3-7</u>
 
 **Make a boxplot of the rating chocolate bars received by bean type**
 
@@ -427,7 +432,7 @@ Not let’s apply the ggplot commands to create a scatter plot.
 - Using chocolate data : `chocolateData`
 - X-axis = Cocoa percentage: `cocoa_percent`
 - Y-axis = Rating a chocolate bar received: `rating`
-- Scatter plot function: `+ geom_points()`
+- Scatter plot function: `+ geom_point()`
 
 ```{r echo = F, results='asis'}
 startCodeDetailsBlock(summaryText = "Check your code")
@@ -478,6 +483,7 @@ endCodeDetailsBlock()
 - A “line of best fit”
 
 Remember:
+
 - Using chocolate data: `chocolateData`
 - X-axis = Cocoa percentage: `cocoa_percent`
 - Y-axis = Rating a chocolate bar received: `rating`

@@ -289,6 +289,8 @@ When plotting a histogram, you can also specify the width of the bins
 through the argument `binwidth` or the number of bins to be used through
 the `bins` argument.
 
+<div class="task-box" markdown="1">
+
 ⭐ <u>Task 3-5</u>
 
 **Make a histogram of the cocoa percentage of bars.**
@@ -320,7 +322,9 @@ ggplot(data = chocolateData, aes(x = cocoa_percent)) +
 
 </div>
 
-⭐ <u>Task 3-6/u\>
+<div class="task-box" markdown="1">
+
+⭐ <u>Task 3-6</u>
 
 **Make a histogram of the cocoa percentage of bars.**
 
@@ -406,7 +410,9 @@ know if the rating of chocolate bars varies according to the bean type.
 You can then specify `bean_type` as the second variable (for the x-axis)
 in the plot.
 
-⭐ <u>Task 3-7/u\>
+<div class="task-box" markdown="1">
+
+⭐ <u>Task 3-7</u>
 
 **Make a boxplot of the rating chocolate bars received by bean type**
 
@@ -565,7 +571,7 @@ bar received.**
 - Using chocolate data : `chocolateData`
 - X-axis = Cocoa percentage: `cocoa_percent`
 - Y-axis = Rating a chocolate bar received: `rating`
-- Scatter plot function: `+ geom_points()`
+- Scatter plot function: `+ geom_point()`
 
 {::options parse_block_html='true' /}
 <details>
@@ -641,9 +647,12 @@ chocolate bar received**, with the following:
 
 - A “line of best fit”
 
-Remember: - Using chocolate data: `chocolateData` - X-axis = Cocoa
-percentage: `cocoa_percent` - Y-axis = Rating a chocolate bar received:
-`rating` - Line of best fit: `geom_smooth(method = "lm")`
+Remember:
+
+- Using chocolate data: `chocolateData`
+- X-axis = Cocoa percentage: `cocoa_percent`
+- Y-axis = Rating a chocolate bar received: `rating`
+- Line of best fit: `geom_smooth(method = "lm")`
 
 {::options parse_block_html='true' /}
 <details>
