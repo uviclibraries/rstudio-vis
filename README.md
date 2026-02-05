@@ -1,4 +1,4 @@
-# WORKSHOP Name goes here...
+# Data Analysis with R Studio - Data manipulation and visualization
 ### UVic Libraries Digital Scholarship Commmons
 
 Link to workshop: https://uviclibraries.github.io/rstudio-vis/
