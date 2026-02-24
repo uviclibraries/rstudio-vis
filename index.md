@@ -5,7 +5,7 @@ nav_order: 1
 ---
 <img src="images/rstudio-logo.png" style="float:right;width:180px;" alt="image description">
 
-# Data Manipulation & Visualization with RStudio
+# RStudio Data Manipulation & Visualization
 
 - Pre-workshop activities: 10 min 
 - Introductory presentation: 10 min
