@@ -1,4 +1,4 @@
-# Data Manipulation & Visualization with RStudio
+# RStudio Data Manipulation & Visualization
 ### UVic Libraries Digital Scholarship Commmons
 
 Link to workshop: https://uviclibraries.github.io/rstudio-vis/
