@@ -47,7 +47,29 @@ mistakes, and make sure the data is ready for your analyses.
 
 Remember, if you or your group have any questions or get stuck as you
 work through this in-class exercise, please ask the instructor for
-assistance. Have fun!
+assistance. But before that, a quick note…
+
+<div class="task-box" markdown="1">
+
+<u><b>A quick note about using AI</b></u>
+
+As you work through this workshop, you may feel tempted to ask an AI
+model for help with the exercises. We discourage this because delegating
+something to AI can prevent you from developing that skill. In fact, one
+of the most effective ways to learn R is to troubleshoot code by
+yourself. AI models can also hallucinate and produce incorrect code, so
+you need to understand enough about R to be able to evaluate their
+output. If AI is doing all your coding for you and you don’t learn the
+underlying logic and syntax of R, it will be harder for you to verify
+their output. That being said, AI can definitely be a helpful tool,
+especially if you use with the right attitude and know what and how to
+ask for the most useful responses. While this workshop doesn’t cover
+best practices for using AI in coding, you can find some useful tips
+<a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1011319" target="_blank" rel="noopener noreferrer">here</a>
+and
+<a href="https://tidyverse.org/blog/2025/04/learn-tidyverse-ai/" target="_blank" rel="noopener noreferrer">here</a>.
+
+</div>
 
 ## 1. Getting ready: installing packages
 
@@ -761,29 +783,7 @@ other ways to write code, check out
 ## 5. Cleaning and validating data
 
 Ok, now that we now how to use the pipe, let’s talk about basic function
-to clean and validate your date. But before that, a quick note…
-
-<div class="task-box" markdown="1">
-
-<u><b>A quick note about using AI</b></u>
-
-As you work through this workshop, you may feel tempted to ask an AI
-model for help with the exercises. We discourage this because delegating
-something to AI can prevent you from developing that skill. In fact, one
-of the most effective ways to learn R is to troubleshoot code by
-yourself. AI models can also hallucinate and produce incorrect code, so
-you need to understand enough about R to be able to evaluate their
-output. If AI is doing all your coding for you and you don’t learn the
-underlying logic and syntax of R, it will be harder for you to verify
-their output. That being said, AI can definitely be a helpful tool,
-especially if you use with the right attitude and know what and how to
-ask for the most useful responses. While this workshop doesn’t cover
-best practices for using AI in coding, you can find some useful tips
-<a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1011319" target="_blank" rel="noopener noreferrer">here</a>
-and
-<a href="https://tidyverse.org/blog/2025/04/learn-tidyverse-ai/" target="_blank" rel="noopener noreferrer">here</a>.
-
-</div>
+to clean and validate your date.
 
 ### 5.1 Fixing column names
 
