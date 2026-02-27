@@ -73,15 +73,18 @@ and
 
 ## 1. Getting ready: installing packages
 
-One of the most fascinating things about R is that it has an active
-community developing a lot of packages everyday, which makes R very
-powerful. A package is a compilation of functions (data sets, code,
-documentations and tests) external to R that provide it with additional
-capabilities.
+For this workshop, we will be installing some packages to be able to use
+some additional functions that are not available in base R. We covered
+what apckages are and how to install them in the [introductory
+workshop](https://uviclibraries.github.io/rstudio/), but here is a quick
+review.
 
+A package is a compilation of functions (data sets, code, documentations
+and tests) external to R that provide it with additional capabilities.
 We can install packages in the console using the `install.packages()`
 function. You should use the console and **not** the code editor to run
-this code because you only need to install the package once.
+this code because you only need to install the package once. After we
+install a package, we have to load it using the `library()` function.
 
 <div class="task-box" markdown="1">
 
@@ -119,63 +122,11 @@ type.
 
 </div>
 
-*Note:* The installation may take a while, sometimes up to 10-15
-minutes. When it’s complete, the right angle bracket `>` will appear at
-the last line of your console.
-
-**Confirm installation**
-
-To check if the package is installed, enter the following in the console
-
-``` r
-# Paste these lines into the console, and then run. 
-installed <- installed.packages() # this creates an object with names of installed packages
-"tidyverse" %in% rownames(installed) # this looks for tidyverse in that object
-## [1] TRUE
-"janitor" %in% rownames(installed) # this looks for janitor in that object
-## [1] TRUE
-"assertr" %in% rownames(installed) # this looks for assertr in that object
-## [1] TRUE
-```
-
 **Load the libraries.**
 
-After we install a package, we have to load it using the `library()`
-function.
-
-- Do not wrap the package name in quotes when using `library()`.
-
-{::options parse_block_html='true' /}
-<details>
-
-<summary>
-
-Why no quotations for library()?
-</summary>
-
-When you install a package in R using **`install.packages()`**, the
-package name must be a character string, hence the quotes. This is
-because **`install.packages()`** is a function that takes a character
-vector as its argument, representing the names of the packages to be
-installed.
-
-However, when you load a package using **`library()`** or
-**`require()`**, you’re not passing a character string; instead, you’re
-using a non-evaluated expression that refers to the package name. Here,
-the package name is an object of mode “name” which **`library()`**
-interprets as the name of a package to load.
-
-In summary, the quotes are needed for **`install.packages()`** because
-it expects a character string, while **`library()`** is designed to take
-an unquoted name that it interprets as a package name.
-
-</details>
-
-{::options parse_block_html='false'/}
-
-- ❗ Put this command in your R script, not in the console. Why? The
-  package only needs to be *installed* once, but it needs to be *loaded*
-  any time you are running your script.
+Now we can load the packages. Put this command in your R script, not in
+the console. Why? The package only needs to be *installed* once, but it
+needs to be *loaded* any time you are running your script.
 
 ``` r
 # Load the packages
