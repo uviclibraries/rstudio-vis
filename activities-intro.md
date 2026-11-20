@@ -3,7 +3,7 @@ layout: default
 title: Self-Directed Introduction
 nav_order: 3
 ---
-# Hands-On Self-Directed Introduction
+# Introduction for Self-Directed Learners
 
 - If not attending a live (in-person or Zoom) session, read the [Introductory Slides](https://docs.google.com/presentation/d/1zah28GYatxt0G62r_XtkNIfoZm-JnxntgNYAlMlJLzE/edit?usp=sharing){:target="_blank"} 
 - Video: [Resize Your Laptop Screen for Workshop Handouts (2 min)](https://www.youtube.com/watch?v=Igk5hZUfzN0){:target="_blank"}
